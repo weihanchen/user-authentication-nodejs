@@ -1,4 +1,4 @@
 module.exports = {
-  'secret': 'cribToken',
-  'database': 'mongodb://weihanchen:xxxxx@ds017432.mlab.com:17432/crib'
-}
+  'secret': process.env.SECRET_KEY || 'user_auth_demo',
+  'database': process.env.MONGO_CONNECTION || 'mongodb://user_auth_demo:a12345@ds031895.mlab.com:31895/user_auth_demo'
+};

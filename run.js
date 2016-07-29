@@ -1,16 +1,16 @@
-let express = require('express');
-let app = express();
-let bodyParser = require('body-parser');
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+//the routing modules
+const users = require('./routes/users');
+app.set('port',process.env.PORT || 3000);
+let config = require('./config/database'); // get db config file
 let morgan = require('morgan');
 let mongoose = require('mongoose');
 let passport = require('passport');
 require('./config/passport')(passport);
-let config = require('./config/database'); // get db config file
-let User = require('./app/models/user'); // get the mongoose model
-let port = process.env.PORT || 8080;
-let jwt = require('jwt-simple');
-let mongoConnection = process.env.MONGO_CONNECTION || 'mongodb://user_auth_demo:a12345@ds031895.mlab.com:31895/user_auth_demo';
-let secretKey = process.env.SECRET_KEY || 'user_auth_demo';
+
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -19,15 +19,16 @@ app.use(morgan('dev'));
 
 app.use(passport.initialize());
 
-//api root
-app.get('/', (req, res) => {
-    res.send('Hello! The API is at http://localhost:' + port + '/api');
-});
-mongoose.connect(mongoConnection);
+
+mongoose.connect(config.database);
 let apiRoutes = express.Router();
+apiRoutes.route('/users')
+	.post(users.signup)
+apiRoutes.route('/users/login')
+	.post(users.login)
 app.use('/api', apiRoutes);
 
 
-// Start the server
-app.listen(port);
-console.log('There will be dragons: http://localhost:' + port);
+app.listen(app.get('port'), () => {
+  console.log('Express server listening on port ' + app.get('port'));
+});
