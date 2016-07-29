@@ -8,4 +8,4 @@ A nodejs server api for user authentication
 
 ## Install Nodejs dependence packages ##
 >1. npm install
->2. node run.js
+>2. node run.js 
