@@ -1,9 +1,9 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt');
+let mongoose = require('mongoose');
+let Schema = mongoose.Schema;
+let bcrypt = require('bcrypt');
 
 // set up a mongoose model
-var UserSchema = new Schema({
+let UserSchema = new Schema({
     name: {
         type: String,
         unique: true,
@@ -15,17 +15,19 @@ var UserSchema = new Schema({
     }
 });
 
-UserSchema.pre('save', function(next) {
-    var user = this;
+UserSchema.pre('save', (next) =>{
+    let user = this;
+    //產生hash當密碼變更或新密碼時
     if (this.isModified('password') || this.isNew) {
-        bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.genSalt(10, (err, salt) =>{
             if (err) {
                 return next(err);
             }
-            bcrypt.hash(user.password, salt, function(err, hash) {
+            bcrypt.hash(user.password, salt, (err, hash) =>{
                 if (err) {
                     return next(err);
                 }
+                //使用hash取代明文密碼
                 user.password = hash;
                 next();
             });
@@ -35,12 +37,18 @@ UserSchema.pre('save', function(next) {
     }
 });
 
-UserSchema.methods.comparePassword = function(passw, cb) {
-    bcrypt.compare(passw, this.password, function(err, isMatch) {
+/**
+ * mongoose支持擴展方法，因此撰寫密碼驗證
+ * @param  {[string]}   password [密碼]
+ * @param  {Function} callback [description]
+ * @return {[type]}            [description]
+ */
+UserSchema.methods.comparePassword = (candidatePassword, callback) => {
+    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
         if (err) {
-            return cb(err);
+            return callback(err);
         }
-        cb(null, isMatch);
+        callback(null, isMatch);
     });
 };
 
