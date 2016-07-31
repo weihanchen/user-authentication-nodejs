@@ -10,7 +10,7 @@ A nodejs server api for user authentication
 >1. npm install
 >2. node run.js 
 
-This is simple demo of user authentication and account sign up, use node js、express、mongodb to complete.
+This is simple demo of user authentication and account registration, use node js、express、mongodb to complete.
 
 ## packages ##
 
