@@ -10,9 +10,10 @@ A nodejs server api for user authentication
 >1. npm install
 >2. node run.js 
 
-This is simple demo of user authentiation and account registration by nodejs、express、mongodb.
+This is simple demo of user authentication and account sign up, use node js、express、mongodb to complete.
 
-## packages ## 
+## packages ##
+
 >1. [PassportJS](http://passportjs.org/) - for user password security
 >2. [Simple JWT](https://www.npmjs.com/package/jwt-simple) - token use
 
