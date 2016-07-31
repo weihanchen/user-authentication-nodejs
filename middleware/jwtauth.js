@@ -1,5 +1,5 @@
-let config = require('../config/database'); // get db config file
-let User = require('../models/user');
+let config = require(__base + 'config/database'); // get db config file
+let User = require(__base + 'models/user');
 let jwt = require('jwt-simple');
 
 module.exports = function(req, res, next) {

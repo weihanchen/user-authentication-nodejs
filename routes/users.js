@@ -1,6 +1,6 @@
 'use strict';
-let config = require('../config/database'); // get db config file
-let User = require('../models/user.js'); // get the mongoose model
+let config = require(__base + 'config/database'); // get db config file
+let User = require(__base + 'models/user.js'); // get the mongoose model
 let jwt = require('jwt-simple');
 let moment = require('moment');
 exports.login = (req, res, next) => {

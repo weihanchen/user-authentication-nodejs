@@ -1,8 +1,8 @@
 let JwtStrategy = require('passport-jwt').Strategy;
 let ExtractJwt = require('passport-jwt').ExtractJwt;
 // load up the user model
-let User = require('../models/user');
-let config = require('./database'); // get db config file
+let User = require(__base + 'models/user');
+let config = require(__base + 'config/database'); // get db config file
 module.exports = (passport) => {
     let opts = {};
     opts.jwtFromRequest = ExtractJwt.fromAuthHeader();

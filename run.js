@@ -1,15 +1,16 @@
+global.__base = __dirname + '/';
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 //the routing modules
-const users = require('./routes/users');
+const users = require(__base + 'routes/users');
 app.set('port', process.env.PORT || 3000);
-let config = require('./config/database'); // get db config file
+let config = require(__base + 'config/database'); // get db config file
 let morgan = require('morgan');
 let mongoose = require('mongoose');
 let passport = require('passport');
-let jwtauth = require('./middleware/jwtauth');
-require('./config/passport')(passport);
+let jwtauth = require(__base + 'middleware/jwtauth');
+require(__base + 'config/passport')(passport);
 
 
 app.use(bodyParser.urlencoded({ extended: false }));
