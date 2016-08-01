@@ -12,7 +12,7 @@ A nodejs server api for user authentication
 
 This is simple demo of user authentication and account registration, use node js、express、mongodb to complete.
 
-## packages ## 
+## packages ##
 >1. [Mongoose](http://mongoosejs.com/) - mongodb object modeling
 >2. [Simple JWT](https://www.npmjs.com/package/jwt-simple) - token use
 >3. [Morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
