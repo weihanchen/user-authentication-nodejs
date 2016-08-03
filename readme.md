@@ -1,4 +1,4 @@
-# Nodejs User Authentication Sample #
+# Nodejs user authentication sample base on json web token #
 A nodejs server api for user authentication
 ## Requirement ##
 * [MongoDB](https://www.mongodb.com/) - Our Database
@@ -6,19 +6,19 @@ A nodejs server api for user authentication
 * [Nodejs](https://nodejs.org/en/) - Backend Framework
 * [NPM](https://www.npmjs.com/) - Package Management
 
-## Install Nodejs dependence packages ##
+## Install nodejs dependence packages ##
 >1. npm install
 >2. node run.js 
 
 This is simple demo of user authentication and account registration, use node js、express、mongodb to complete.
 
-## packages ##
+## Packages ##
 >1. [Mongoose](http://mongoosejs.com/) - mongodb object modeling
 >2. [Simple JWT](https://www.npmjs.com/package/jwt-simple) - token use
 >3. [Morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
 >4. [moment](http://momentjs.com/docs/) - date parse
 
-## routing ##
+## Routing ##
 * **api** - api root
 
 * **api/users**
