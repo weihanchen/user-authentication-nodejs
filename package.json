@@ -1,6 +1,6 @@
 {
-    "name": "crib_api",
-    "description": "crib api server",
+    "name": "user_authentication_api",
+    "description": "api server",
     "node-main": "./run.js",
     "dependencies": {
         "bcrypt-nodejs": "^0.0.3",
