@@ -37,3 +37,6 @@ This is simple demo of user authentication and account registration, use node js
 
 * **api/users/me**
 	`get - get current user info`
+
+* **api/users/:id**
+	`delete - delete user`

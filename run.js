@@ -16,13 +16,16 @@ app.use(bodyParser.json());
 app.use(morgan('dev'));
 
 app.use(jwtauth.initialize());
-
+mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
 let apiRoutes = express.Router();
 apiRoutes.route('/users')
     .post(users.signup)
+
 apiRoutes.route('/users/login')
     .post(users.login)
+apiRoutes.route('/users/:id')
+	.delete(users.delete)
 apiRoutes.use(jwtauth.authenticate()).route('/users/me')
     .get(users.me)
 app.use('/api', apiRoutes);
@@ -36,3 +39,6 @@ app.listen(app.get('port'), () => {
 function errorHandler(err, req, res, next) {
     res.status(err.status || 500).json(err);
 }
+
+
+module.exports = app;

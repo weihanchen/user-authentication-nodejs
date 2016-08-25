@@ -4,6 +4,15 @@ let errorBuilder = require(__base + 'services/error/builder');
 let User = require(__base + 'models/user.js'); // get the mongoose model
 let jwt = require('jwt-simple');
 let moment = require('moment');
+exports.delete = (req, res, next) => {
+    let userid = req.params.id;
+    User.findByIdAndRemove(userid, function(error, user) {
+        if (error) next(errorBuilder.badRequest(error));
+        if (!user) next(errorBuilder.notFound('resource not found'));
+        else res.json({ success: true, uid: user._id });
+    })
+
+}
 exports.login = (req, res, next) => {
     User.findOne({
         username: req.body.username
@@ -18,7 +27,7 @@ exports.login = (req, res, next) => {
                         iss: user.id, //加密對象
                         exp: expires
                     }, config.secret);
-                    res.json({ success: true, token: 'JWT ' + token }); //JWT for passport-jwt extract fromAuthHeader
+                    res.json({ success: true, uid: user.id, token: 'JWT ' + token }); //JWT for passport-jwt extract fromAuthHeader
                 } else {
                     next(errorBuilder.badRequest('Wrong password.'));
                 }
