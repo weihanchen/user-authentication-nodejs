@@ -12,6 +12,11 @@ A nodejs server api for user authentication
 
 This is simple demo of user authentication and account registration, use node js、express、mongodb to complete.
 
+## Config ##
+>1. config/database.js - database and jwt secret configuration
+>2. secret - jwt auth secret
+>3. database - database connection
+
 ## Packages ##
 >1. [Mongoose](http://mongoosejs.com/) - mongodb object modeling
 >2. [Simple JWT](https://www.npmjs.com/package/jwt-simple) - token use
