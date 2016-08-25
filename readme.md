@@ -40,3 +40,7 @@ This is simple demo of user authentication and account registration, use node js
 
 * **api/users/:id**
 	`delete - delete user`
+
+## API Test ##
+* npm install --dev
+* npm run test
