@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/weihanchen/NodeJS_User_Authentication.svg?branch=master)](https://travis-ci.org/weihanchen/NodeJS_User_Authentication)
 # Nodejs user authentication sample base on json web token #
+[![Build Status](https://travis-ci.org/weihanchen/NodeJS_User_Authentication.svg?branch=master)](https://travis-ci.org/weihanchen/NodeJS_User_Authentication)
 A nodejs server api for user authentication
 ## Requirement ##
 * [MongoDB](https://www.mongodb.com/) - Our Database
