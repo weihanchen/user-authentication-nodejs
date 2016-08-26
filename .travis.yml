@@ -10,3 +10,6 @@ before_script:
   - mongo user_auth_demo --eval 'db.addUser("travis", "test");'
   - npm install
 script: npm run test
+notification:
+  email:
+    - willhanchen@gmail.com
