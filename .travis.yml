@@ -8,6 +8,5 @@ services:
 before_script:
   - sleep 15
   - mongo user_auth_demo --eval 'db.addUser("travis", "test");'
-before_script:
   - npm install
 script: npm run test
