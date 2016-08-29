@@ -9,7 +9,11 @@ before_script:
   - sleep 15
   - mongo user_auth_demo --eval 'db.addUser("travis", "test");'
   - npm install
+branchs:
+  only:
+    - master
 script: npm run test
 notification:
   email:
     - willhanchen@gmail.com
+  on_success: always
