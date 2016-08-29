@@ -9,7 +9,7 @@ before_script:
   - sleep 15
   - mongo user_auth_demo --eval 'db.addUser("travis", "test");'
   - npm install
-branchs:
+branches:
   only:
     - master
 script: npm run test
