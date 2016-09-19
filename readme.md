@@ -31,6 +31,10 @@ This is simple demo of user authentication and account registration, use node js
 ## Routing ##
 * **api** - api root
 
+* **api/initialize**
+
+  ` post - create roles and admin user`
+
 * **api/users**
 
   ` post - create new user and password hash`
@@ -41,9 +45,11 @@ This is simple demo of user authentication and account registration, use node js
 	`post - login and get jwt token`
 
 * **api/users/me**
+
 	`get - get current user info`
 
 * **api/users/:id**
+
 	`delete - delete user`
 
 ## API Test ##

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 //the routing modules
 const users = require(__base + 'routes/users');
+const initial = require(__base + 'routes/initial');
 app.set('port', process.env.PORT || 3000);
 let config = require(__base + 'config/database'); // get db config file
 let morgan = require('morgan');
@@ -19,6 +20,9 @@ app.use(jwtauth.initialize());
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database);
 let apiRoutes = express.Router();
+apiRoutes.route('/initialize')
+	.post(initial.initialize)
+	
 apiRoutes.route('/users')
     .post(users.signup)
 

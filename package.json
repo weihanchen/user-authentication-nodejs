@@ -15,10 +15,12 @@
     },
     "devDependencies": {
         "mocha": "^3.0.2",
+        "nodemon": "^1.9.1",
         "supertest": "^2.0.0",
         "should": "^11.1.0"
     },
     "scripts": {
+        "dev": "node dev.js",
         "test": "./node_modules/.bin/mocha test",
         "product": "node run.js"
     },

@@ -17,6 +17,10 @@ let UserSchema = new Schema({
     password: {
         type: String,
         required: true
+    },
+    roleId: {
+        type: String,
+        required: true
     }
 });
 
