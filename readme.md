@@ -52,6 +52,19 @@ This is simple demo of user authentication and account registration, use node js
 
 	`delete - delete user`
 
+## Permissions(roles) ##
+* admin
+	* `delete` - other users and roles
+	* `get` - all users and roles
+	* `post` - user and role
+	* `put` - all users and roles
+	
+* user
+	* `delete` - self
+	* `get` - self
+	* `post` - signup
+	* `put` - self
+
 ## API Test ##
 * npm install --dev
 * npm run test

@@ -22,21 +22,21 @@ exports.initialize = (req, res, next) => {
 //private methods
 function setAdminUser() {
     let deferred = Promise.defer();
-    Role.findOne({$query:{},$orderby:{level:-1}}, (error, role) => {
-        if (error) deferred.reject(errorBuilder.badRequest(error.errmsg));
-        else if (role) {
-            let adminUser = new User({
-                displayName: initial_config.admin_account,
-                username: initial_config.admin_account,
-                password: initial_config.admin_password,
-                roleId: role._id
-            })
-            adminUser.save(err => {
-                if (err) deferred.reject(errorBuilder.badRequest(err.errmsg));
-                else deferred.resolve();
-            })
-        }
-    })
+    let dbErrorHandler = (error) => {
+        deferred.reject(errorBuilder.badRequest(err.errmsg));
+    }
+    Role.findOne({ $query: {}, $orderby: { level: -1 } }).exec().then(role => {
+        let adminUser = new User({
+            displayName: initial_config.admin_account,
+            username: initial_config.admin_account,
+            password: initial_config.admin_password,
+            roleId: role._id
+        })
+        adminUser.save().then(() => {
+            deferred.resolve();
+        }).catch(dbErrorHandler);
+    }).catch(dbErrorHandler);
+
     return deferred.promise;
 }
 
