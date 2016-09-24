@@ -4,12 +4,24 @@ let should = require('should');
 let util = require('util');
 module.exports = (app, username, displayName, password) => {
     let request = supertest(app);
+    let initializeUrl = '/api/initialize';
     let usersUrl = '/api/users';
     let loginUrl = '/api/users/login';
     let meUrl = '/api/users/me';
+    describe('initialize...', () => {
+        it('should response status 200 when initialize', function(done) {
+            this.timeout(10000); //set timeout limit
+            request.post(initializeUrl)
+                .set('Content-Type', 'application/json')
+                .expect(200)
+                .end(function(err, res) {
+                    done(err);
+                })
+        })
+    })
     describe('signup...', () => {
         it('should response status 200 when signup', function(done) {
-            this.timeout(10000);//set timeout limit
+            this.timeout(10000); //set timeout limit
             request.post(usersUrl)
                 .set('Content-Type', 'application/json')
                 .send({
