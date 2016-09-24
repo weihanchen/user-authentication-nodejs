@@ -25,17 +25,24 @@ function setAdminUser() {
     let dbErrorHandler = (error) => {
         deferred.reject(errorBuilder.badRequest(err.errmsg));
     }
-    Role.findOne({ $query: {}, $orderby: { level: -1 } }).exec().then(role => {
-        let adminUser = new User({
-            displayName: initial_config.admin_account,
-            username: initial_config.admin_account,
-            password: initial_config.admin_password,
-            roleId: role._id
-        })
-        adminUser.save().then(() => {
+    User.findOne({ username: initial_config.admin_account }).then(user => {
+        if (user) { //has initialized
             deferred.resolve();
+            return;
+        }
+        Role.findOne({ level: initial_config.user_role_level }).then(role => {
+            let adminUser = new User({
+                displayName: initial_config.admin_account,
+                username: initial_config.admin_account,
+                password: initial_config.admin_password,
+                roleId: role._id
+            })
+            adminUser.save().then(() => {
+                deferred.resolve();
+            }).catch(dbErrorHandler);
         }).catch(dbErrorHandler);
     }).catch(dbErrorHandler);
+
 
     return deferred.promise;
 }
@@ -43,16 +50,25 @@ function setAdminUser() {
 function setRoles() {
     let promises = [];
     let result = Promise.defer();
-    let roles = initial_config.roles;
-    roles.forEach(role => {
-        let deferred = Promise.defer();
-        let newRole = new Role(role);
-        newRole.save(error => {
-            if (error) deferred.reject(errorBuilder.badRequest(error.errmsg));
-            else deferred.resolve();
-        });
-        promises.push(deferred.promise);
+    Role.count().then(count => {
+        if (count <= 0) {
+            deferred.resolve();
+            return;
+        }
+        let roles = initial_config.roles;
+        roles.forEach(role => {
+            let deferred = Promise.defer();
+            let newRole = new Role(role);
+            newRole.save(error => {
+                if (error) deferred.reject(errorBuilder.badRequest(error.errmsg));
+                else deferred.resolve();
+            });
+            promises.push(deferred.promise);
+        })
+    },error=>{
+        deferred.reject(error);
     })
+
     Promise.all(promises).then(() => {
         result.resolve();
     }, error => {

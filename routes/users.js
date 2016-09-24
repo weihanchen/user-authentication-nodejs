@@ -9,15 +9,24 @@ let permissionValidator = new PermissionValidator();
 let User = require(__base + 'models/user.js'); // get the mongoose model
 let Role = require(__base + 'models/role');
 
-
+/**
+ * super admin 不能刪除自己帳號,待優化id不存在
+ */
 exports.delete = (req, res, next) => {
+    console.log('delete');
     let userid = req.params.id;
-    User.findByIdAndRemove(userid).exec().then(user => {
-        if (!user) next(errorBuilder.notFound('resource not found'));
-        else res.json({ success: true, uid: user._id });
-    }).catch(error => {
-        next(errorBuilder.badRequest(error));
-    })
+    let loginUserId = req.user.id;
+    let errorHandler = (error) => {
+        next(error);
+    }
+    permissionValidator.currentUserOperation(loginUserId, userid).then((result) => {
+        if (result.isAdmin && result.isSelf) errorHandler(errorBuilder.badRequest('admin cannot remove self\'s account'))
+        else {
+            result.user.remove().then(() => {
+                res.json({ success: true, uid: result.user._id });
+            }).catch(errorHandler)
+        }
+    }).catch(errorHandler)
 }
 
 /**
@@ -32,21 +41,21 @@ exports.edit = (req, res, next) => {
     let errorHandler = (error) => {
         next(error);
     }
-    let updateUser = (user) =>{
-         Object.assign(user, req.body);
-            user.save().then(() => {
-                res.json({
-                    _id: user.id,
-                    username: user.username,
-                    displayName: user.displayName
-                })
-            }).catch(errorHandler);
+    let updateUser = (user) => {
+        Object.assign(user, req.body);
+        user.save().then(() => {
+            res.json({
+                _id: user.id,
+                username: user.username,
+                displayName: user.displayName
+            })
+        }).catch(errorHandler);
     }
     permissionValidator.currentUserOperation(loginUserId, userid).then((result) => {
         if (req.body.hasOwnProperty('roleId')) {
             permissionValidator.editRoleInRoles(req.body.roleId).then((editingRole) => {
                 if (result.isSelf) errorHandler(errorBuilder.badRequest('cannot update role'));
-                else if (result.isAdmin){
+                else if (result.isAdmin) {
                     updateUser(result.user);
                 }
 

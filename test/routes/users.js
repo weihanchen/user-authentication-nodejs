@@ -10,7 +10,6 @@ module.exports = (app, username, displayName, password) => {
     let meUrl = '/api/users/me';
     describe('initialize...', () => {
         it('should response status 200 when initialize', function(done) {
-            this.timeout(10000); //set timeout limit
             request.post(initializeUrl)
                 .set('Content-Type', 'application/json')
                 .expect(200)
@@ -21,7 +20,6 @@ module.exports = (app, username, displayName, password) => {
     })
     describe('signup...', () => {
         it('should response status 200 when signup', function(done) {
-            this.timeout(10000); //set timeout limit
             request.post(usersUrl)
                 .set('Content-Type', 'application/json')
                 .send({
@@ -79,6 +77,7 @@ module.exports = (app, username, displayName, password) => {
             })
             it('should response success when deleting user exist', function(done) {
                 request.delete(resourceUrl)
+                    .set('Authorization', token)
                     .expect(200)
                     .end(function(err, res) {
                         res.body.should.have.property('success');
@@ -88,6 +87,7 @@ module.exports = (app, username, displayName, password) => {
             })
             it('should response not found when user not exist', function(done) {
                 request.delete(resourceUrl)
+                    .set('Authorization', token)
                     .expect(404)
                     .end(function(err, res) {
                         res.body.message.should.equal('resource not found');

@@ -20,7 +20,7 @@ module.exports = function() {
         User.findOne({ _id: payload.iss }, function(err, user) {
             if (err) return done(err, false);
             if (user) done(null, user);
-            else done(null, false);
+            else done(errorBuilder.notFound('resource not found'), false);
         });
     });
     passport.use(strategy);
