@@ -52,7 +52,7 @@ function setRoles() {
     let result = Promise.defer();
     Role.count().then(count => {
         if (count > 0) {
-            deferred.resolve();
+            result.resolve();
             return;
         }
         let roles = initial_config.roles;
