@@ -2,10 +2,14 @@
 let config = require(__base + 'config/database'); // get db config file
 let errorBuilder = require(__base + 'services/error/builder');
 let initial_config = require(__base + 'config/initial'); // get initial config file
-let User = require(__base + 'models/user.js'); // get the mongoose model
-let Role = require(__base + 'models/role');
 let jwt = require('jwt-simple');
 let moment = require('moment');
+let PermissionValidator = require(__base + 'services/permissions/validator');
+let permissionValidator = new PermissionValidator();
+let User = require(__base + 'models/user.js'); // get the mongoose model
+let Role = require(__base + 'models/role');
+
+
 exports.delete = (req, res, next) => {
     let userid = req.params.id;
     User.findByIdAndRemove(userid).exec().then(user => {
@@ -15,26 +19,59 @@ exports.delete = (req, res, next) => {
         next(errorBuilder.badRequest(error));
     })
 }
+
+/**
+ * 業務邏輯
+ * 系統管理者不可更動自己的role但可以更動他人
+ * 一般使用者不可更動role
+ */
+exports.edit = (req, res, next) => {
+    let userid = req.params.id;
+    let loginUserId = req.user.id;
+    let rolePermissionMapping = {};
+    let errorHandler = (error) => {
+        next(error);
+    }
+    let updateUser = (user) =>{
+         Object.assign(user, req.body);
+            user.save().then(() => {
+                res.json({
+                    _id: user.id,
+                    username: user.username,
+                    displayName: user.displayName
+                })
+            }).catch(errorHandler);
+    }
+    permissionValidator.currentUserOperation(loginUserId, userid).then((result) => {
+        if (req.body.hasOwnProperty('roleId')) {
+            permissionValidator.editRoleInRoles(req.body.roleId).then((editingRole) => {
+                if (result.isSelf) errorHandler(errorBuilder.badRequest('cannot update role'));
+                else if (result.isAdmin){
+                    updateUser(result.user);
+                }
+
+            }).catch(errorHandler);
+        } else {
+            updateUser(result.user);
+        }
+    }).catch(errorHandler)
+}
+
 exports.info = (req, res, next) => {
     let userid = req.params.id;
     let loginUserId = req.user._id;
-    let dbErrorHandler = (error) =>{
-         next(errorBuilder.internalServerError(error));
-    }
-    User.findById(userid).then(user=>{
-        Role.findById(user.roleId).then(role=>{
-            if (role.level != initial_config.admin_role_level || userid != loginUserId) next(errorBuilder.unauthorized('permission denied'));
-            else {
-                res.json({
-                    _id: user._id,
-                    username: user.username,
-                    displayName: user.displayName,
-                    role: role.role
-                })
-            }
-        }).catch(dbErrorHandler);
-    }).catch(dbErrorHandler);
+    permissionValidator.currentUserOperation(loginUserId, userid).then((result) => {
+        res.json({
+            _id: result.user._id,
+            username: result.user.username,
+            displayName: result.user.displayName,
+            role: result.role.role
+        })
+    }).catch((error) => {
+        next(error);
+    })
 }
+
 exports.login = (req, res, next) => {
     User.findOne({ username: req.body.username }).exec().then(user => {
         if (!user) next(errorBuilder.badRequest('User not found.'));
@@ -56,6 +93,7 @@ exports.login = (req, res, next) => {
         next(errorBuilder.badRequest(error));
     })
 }
+
 exports.me = (req, res, next) => { //get users/me之前經過中間件驗證用戶權限，當驗證通過便取得正確用戶訊息，直接回傳即可
     let responseBody = {
         username: req.user.username,
@@ -63,6 +101,7 @@ exports.me = (req, res, next) => { //get users/me之前經過中間件驗證用�
     }
     res.send(responseBody);
 }
+
 exports.signup = (req, res, next) => {
     let requireProperties = ['displayName', 'password', 'username'];
     let propertyMissingMsg = '';
@@ -81,7 +120,11 @@ exports.signup = (req, res, next) => {
         next(errorBuilder.internalServerError(error));
     }
 
-    Role.findOne({ $query: {}, $orderby: { level: 1 } }).exec().then(role => { //get min level role to set signup user
+    Role.findOne({ level: initial_config.user_role_level }).then(role => { //get min level role to set signup user
+        if (!role) {
+            next(errorBuilder.badRequest('please post /api/initialize'));
+            return;
+        }
         let newUser = new User({
             username: req.body.username,
             displayName: req.body.displayName,
@@ -97,6 +140,4 @@ exports.signup = (req, res, next) => {
             }
         }).catch(dbErrorHandler)
     })
-
-
 }

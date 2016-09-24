@@ -6,16 +6,17 @@
 
 A nodejs server api for user authentication
 ## Requirement ##
-* [MongoDB](https://www.mongodb.com/) - Our Database
+* [MongoDB](https://www.mongodb.com/) - Our Database v3.2
 * [Expressjs](http://expressjs.com/zh-tw/) - API Server
 * [Nodejs](https://nodejs.org/en/) - Backend Framework
 * [NPM](https://www.npmjs.com/) - Package Management
 
 ## Install nodejs dependence packages ##
->1. npm install
->2. node run.js 
+* npm install
+* development mode - npm run dev
+* production mode - npm run product
 
-This is simple demo of user authentication and account registration, use node js、express、mongodb to complete.
+This is simple demo of user authentication、permissions and account registration, use node js、express、mongodb to complete.
 
 ## Config ##
 >1. config/database.js - database and jwt secret configuration
@@ -28,7 +29,31 @@ This is simple demo of user authentication and account registration, use node js
 >3. [Morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
 >4. [moment](http://momentjs.com/docs/) - date parse
 
-## Routing ##
+## Step ##
+>1. edit config/database.js - database connection and jwt secret
+>2. edit config/initial.js - super admin account and role's permissions
+>3. run api server - npm run dev
+>4. post /api/initialize to create roles and super admin account
+>5. post api/users - create new account
+>6. post api/users/login - login and get jwt token then frontend can store this token to use other api
+>7. use request header: {Authorization: (jwt token)} when use other api
+>8. [read documentation to use api](#Documentation)
+
+## Permissions(roles) ##
+* admin
+	* `delete` - other users and roles
+	* `get` - all users and roles
+	* `post` - user and role
+	* `put` - all users and other user's role
+	
+* user
+	* `delete` - self
+	* `get` - self
+	* `post` - signup
+	* `put` - self but cannot update role
+
+## Documentation ##
+
 * **api** - api root
 
 * **api/initialize**
@@ -37,7 +62,7 @@ This is simple demo of user authentication and account registration, use node js
 
 * **api/users**
 
-  ` post - create new user and password hash`
+  ` post - create new user and password hash `
 
 
 * **api/users/login**
@@ -50,20 +75,13 @@ This is simple demo of user authentication and account registration, use node js
 
 * **api/users/:id**
 
-	`delete - delete user`
-
-## Permissions(roles) ##
-* admin
-	* `delete` - other users and roles
-	* `get` - all users and roles
-	* `post` - user and role
-	* `put` - all users and roles
+	` delete - delete user `
 	
-* user
-	* `delete` - self
-	* `get` - self
-	* `post` - signup
-	* `put` - self
+	` get - get user info `
+
+	` put - update username、displayName only superadmin can update other user's role`
+
+
 
 ## API Test ##
 * npm install --dev

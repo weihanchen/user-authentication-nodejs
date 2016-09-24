@@ -28,11 +28,16 @@ apiRoutes.route('/users')
 
 apiRoutes.route('/users/login')
     .post(users.login)
-apiRoutes.use(jwtauth.authenticate()).route('/users/:id')
-	.get(users.info)
-	.delete(users.delete)
+
 apiRoutes.use(jwtauth.authenticate()).route('/users/me')
     .get(users.me)
+    
+apiRoutes.use(jwtauth.authenticate()).route('/users/:id')
+	.delete(users.delete)
+	.get(users.info)
+	.put(users.edit)
+
+
 app.use('/api', apiRoutes);
 app.use(errorHandler);
 
