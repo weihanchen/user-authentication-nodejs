@@ -51,7 +51,7 @@ function setRoles() {
     let promises = [];
     let result = Promise.defer();
     Role.count().then(count => {
-        if (count <= 0) {
+        if (count > 0) {
             deferred.resolve();
             return;
         }
@@ -65,7 +65,7 @@ function setRoles() {
             });
             promises.push(deferred.promise);
         })
-    },error=>{
+    }).catch(error =>{
         deferred.reject(error);
     })
 

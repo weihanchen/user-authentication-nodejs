@@ -21,7 +21,7 @@
     },
     "scripts": {
         "dev": "node dev.js",
-        "test": "./node_modules/.bin/mocha test --timeout 200000",
+        "test": "./node_modules/.bin/mocha test --timeout 20000",
         "product": "node run.js"
     },
     "author": "will.chen",
