@@ -33,7 +33,7 @@ module.exports = (app, username, displayName, password) => {
                 })
         })
     })
-    describe('login...', () => {
+    describe('Basic', () => {
         let token;
         let userid;
         before((done) => { //login and save token

@@ -86,3 +86,12 @@ This is simple demo of user authentication、permissions and account registratio
 ## API Test ##
 * npm install --dev
 * npm run test
+
+
+## To Do ##
+* get user list
+* edit role name
+* add more test case for permissions
+* add business logic extension framework document
+* add frontend ui to run this sample
+* add swagger ui
