@@ -28,6 +28,7 @@ This is simple demo of user authentication、permissions and account registratio
 >2. [Simple JWT](https://www.npmjs.com/package/jwt-simple) - token use
 >3. [Morgan](https://github.com/expressjs/morgan) - HTTP request logger middleware for node.js
 >4. [moment](http://momentjs.com/docs/) - date parse
+>5. [bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) - ecrypt password
 
 ## Step ##
 >1. edit config/database.js - database connection and jwt secret
@@ -62,7 +63,7 @@ This is simple demo of user authentication、permissions and account registratio
 
 * **api/users**
 
-  ` post - create new user and password hash `
+  ` post - create new user `
 
 
 * **api/users/login**
