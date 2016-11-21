@@ -1,20 +1,29 @@
 # Nodejs user authentication sample base on json web token #
 
-[![Build Status](https://travis-ci.org/weihanchen/User_Authentication_Nodejs.svg?branch=master)](https://travis-ci.org/weihanchen/User_Authentication_Nodejs)
-[![Dependency Status](https://david-dm.org/weihanchen/NodeJS_User_Authentication.svg)](https://david-dm.org/weihanchen/NodeJS_User_Authentication)
-[![devDependencies Status](https://david-dm.org/weihanchen/NodeJS_User_Authentication/dev-status.svg)](https://david-dm.org/weihanchen/NodeJS_User_Authentication?type=dev)
+[![Build Status](https://travis-ci.org/weihanchen/user-authentication-nodejs.svg?branch=master)](https://travis-ci.org/weihanchen/user-authentication-nodejs)
+[![Dependency Status](https://david-dm.org/weihanchen/user-authentication-nodejs.svg)](https://david-dm.org/weihanchen/user-authentication-nodejs)
+[![devDependencies Status](https://david-dm.org/weihanchen/user-authentication-nodejs/dev-status.svg)](https://david-dm.org/weihanchen/user-authentication-nodejs?type=dev)
 
-A nodejs server api for user authentication
+A nodejs server api for user authentication and use react to design frontend
+
 ## Requirement ##
 * [MongoDB](https://www.mongodb.com/) - Our Database v3.2
 * [Expressjs](http://expressjs.com/zh-tw/) - API Server
 * [Nodejs](https://nodejs.org/en/) - Backend Framework
 * [NPM](https://www.npmjs.com/) - Package Management
 
-## Install nodejs dependence packages ##
+## Install server dependence packages ##
+* cd server
 * npm install
 * development mode - npm run dev
 * production mode - npm run product
+
+## Install client dependence packages ##
+* cd client
+* npm install
+
+## client react documentation ##
+* client/readme.md
 
 This is simple demo of user authentication、permissions and account registration, use node js、express、mongodb to complete.
 

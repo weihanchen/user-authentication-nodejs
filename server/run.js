@@ -11,7 +11,9 @@ let morgan = require('morgan');
 let mongoose = require('mongoose');
 let jwtauth = require(__base + 'middleware/jwtauth')();
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({
+	extended: false
+}));
 app.use(bodyParser.json());
 // log to console
 app.use(morgan('dev'));
@@ -22,16 +24,16 @@ mongoose.connect(config.database);
 let apiRoutes = express.Router();
 apiRoutes.route('/initialize')
 	.post(initial.initialize)
-	
+
 apiRoutes.route('/users')
-    .post(users.signup)
+	.post(users.signup)
 
 apiRoutes.route('/users/login')
-    .post(users.login)
+	.post(users.login)
 
 apiRoutes.use(jwtauth.authenticate()).route('/users/me')
-    .get(users.me)
-    
+	.get(users.me)
+
 apiRoutes.use(jwtauth.authenticate()).route('/users/:id')
 	.delete(users.delete)
 	.get(users.info)
@@ -43,11 +45,11 @@ app.use(errorHandler);
 
 
 app.listen(app.get('port'), () => {
-    console.log('Express server listening on port ' + app.get('port'));
+	console.log('Express server listening on port ' + app.get('port'));
 });
 
 function errorHandler(err, req, res, next) {
-    res.status(err.status || 500).json(err);
+	res.status(err.status || 500).json(err);
 }
 
 

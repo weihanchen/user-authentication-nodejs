@@ -11,7 +11,6 @@ module.exports = (app, username, displayName, password) => {
     describe('initialize...', () => {
         it('should response status 200 when initialize', function(done) {
             request.post(initializeUrl)
-                .set('Content-Type', 'application/json')
                 .expect(200)
                 .end(function(err, res) {
                     done(err);

@@ -1,13 +1,14 @@
 language: node_js
 node_js:
+  - '7.0.0'
   - '6.5.0'
   - '6.4.0'
-  - '6.2.0'
 services:
   - mongodb
 before_script:
   - sleep 15
   - mongo user_auth_demo --eval 'db.addUser("travis", "test");'
+  - cd server
   - npm install
 branches:
   only:
