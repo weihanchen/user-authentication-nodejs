@@ -7,7 +7,11 @@ class Body extends React.Component {
 	render() {
 		return (
 			<div>
-				Body
+				<div className="col-md-8 col-md-offset-2">
+					<div className="content-block">
+						{this.props.children}
+					</div>
+				</div>
 			</div>
 		)
 	}

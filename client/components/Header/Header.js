@@ -2,12 +2,14 @@ import React from 'react'
 import {
 	Link
 } from 'react-router'
+//components
+import AppBar from 'material-ui/AppBar';
 
 class Header extends React.Component {
 	render() {
 		return (
 			<div>
-				Header
+				<AppBar title="Simple demo of user authentication"  showMenuIconButton={false} className="text-center"></AppBar>
 			</div>
 		)
 	}

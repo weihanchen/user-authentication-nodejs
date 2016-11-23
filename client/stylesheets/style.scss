@@ -1,0 +1,17 @@
+@import "./variables";
+@import "./mixins";
+/* components */
+@import "./components/login";
+@import "./components/footer";
+.content-block {
+	margin: 10em 2em 0 2em;
+}
+
+.fill {
+   display: flex;
+   flex: 1 1 auto;
+}
+
+.element-horizontal-gap {
+	margin: 0 0.2em 0 0.2em
+}

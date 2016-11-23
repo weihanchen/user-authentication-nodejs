@@ -1,4 +1,5 @@
 import React from 'react'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //import components
 import Header from '../Header'
 import Body from '../Body'
@@ -10,11 +11,13 @@ class App extends React.Component {
 	}
 	render() {
 		return (
-			<div>
-				<Header />
-				<Body children={this.props.children} {...this.props}></Body>
-				<Footer />
-			</div>
+			<MuiThemeProvider>
+				<div>
+					<Header />
+					<Body children={this.props.children} {...this.props}></Body>
+					<Footer />
+				</div>
+			</MuiThemeProvider>
 		)
 	}
 }
