@@ -3,8 +3,14 @@
 /* components */
 @import "./components/login";
 @import "./components/footer";
-.content-block {
-	margin: 10em 2em 0 2em;
+
+.content {
+	&-block {
+		margin: 10em 2em 0 2em;
+	}
+	&-container{
+		padding: 1em;
+	}
 }
 
 .fill {
