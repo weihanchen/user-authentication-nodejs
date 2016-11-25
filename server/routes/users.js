@@ -23,7 +23,10 @@ exports.delete = (req, res, next) => {
         if (result.isAdmin && result.isSelf) errorHandler(errorBuilder.badRequest('admin cannot remove self\'s account'))
         else {
             result.user.remove().then(() => {
-                res.json({ success: true, uid: result.user._id });
+                res.json({
+                    success: true,
+                    uid: result.user._id
+                });
             }).catch(errorHandler)
         }
     }).catch(errorHandler)
@@ -82,7 +85,9 @@ exports.info = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
-    User.findOne({ username: req.body.username }).exec().then(user => {
+    User.findOne({
+        username: req.body.username
+    }).exec().then(user => {
         if (!user) next(errorBuilder.badRequest('User not found.'));
         else {
             user.comparePassword(req.body.password, (error, isMatch) => { //使用user schema中定義的comparePassword檢查請求密碼是否正確
@@ -92,7 +97,11 @@ exports.login = (req, res, next) => {
                         iss: user.id, //加密對象
                         exp: expires
                     }, config.secret);
-                    res.json({ success: true, uid: user.id, token: 'JWT ' + token }); //JWT for passport-jwt extract fromAuthHeader
+                    res.json({
+                        success: true,
+                        uid: user.id,
+                        token: 'JWT ' + token
+                    }); //JWT for passport-jwt extract fromAuthHeader
                 } else {
                     next(errorBuilder.badRequest('Wrong password.'));
                 }
@@ -105,6 +114,7 @@ exports.login = (req, res, next) => {
 
 exports.me = (req, res, next) => { //get users/me之前經過中間件驗證用戶權限，當驗證通過便取得正確用戶訊息，直接回傳即可
     let responseBody = {
+        uid: req.user.id,
         username: req.user.username,
         displayName: req.user.displayName
     }
@@ -129,7 +139,9 @@ exports.signup = (req, res, next) => {
         next(errorBuilder.internalServerError(error));
     }
 
-    Role.findOne({ level: initial_config.user_role_level }).then(role => { //get min level role to set signup user
+    Role.findOne({
+        level: initial_config.user_role_level
+    }).then(role => { //get min level role to set signup user
         if (!role) {
             next(errorBuilder.badRequest('please post /api/initialize'));
             return;
@@ -140,11 +152,16 @@ exports.signup = (req, res, next) => {
             password: req.body.password,
             roleId: role._id
         })
-        User.findOne({ username: newUser.username }).exec().then((user) => {
+        User.findOne({
+            username: newUser.username
+        }).exec().then((user) => {
             if (user) next(errorBuilder.badRequest('username already exist.'));
             else {
                 newUser.save().then(() => {
-                    res.json({ success: true, message: 'Successful signup.' });
+                    res.json({
+                        success: true,
+                        message: 'Successful signup.'
+                    });
                 }).catch(dbErrorHandler);
             }
         }).catch(dbErrorHandler)

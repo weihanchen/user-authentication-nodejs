@@ -12,6 +12,11 @@ A nodejs server api for user authentication and use react to design frontend
 * [Nodejs](https://nodejs.org/en/) - Backend Framework
 * [NPM](https://www.npmjs.com/) - Package Management
 
+## System Environment Variables ##
+* PORT
+* SECRET_KEY
+* MONGO_CONNECTION
+
 ## Install server dependence packages ##
 * cd server
 * npm install
@@ -22,7 +27,7 @@ A nodejs server api for user authentication and use react to design frontend
 * cd client
 * npm install
 
-## client react documentation ##
+## [client react documentation]() ##
 * client/readme.md
 
 This is simple demo of user authentication、permissions and account registration, use node js、express、mongodb to complete.
@@ -63,6 +68,8 @@ This is simple demo of user authentication、permissions and account registratio
 	* `put` - self but cannot update role
 
 ## Documentation ##
+
+* request header - Authorization (json web token)
 
 * **api** - api root
 

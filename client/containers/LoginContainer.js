@@ -8,6 +8,9 @@ import {
 import {
 	bindActionCreators
 } from 'redux';
+import {
+	requestLogin
+} from '../actions'
 //components
 import Login from '../components/Login'
 
@@ -22,7 +25,7 @@ class LoginContainer extends Component {
 			login
 		} = this.props
 		return (
-			<Login status={login.status} handleLogin={this.handleLogin.bind(this)} />
+			<Login errorContent={login.error} status={login.status} handleLogin={this.handleLogin.bind(this)} />
 		)
 	}
 }
@@ -35,7 +38,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-
+		requestLogin
 	}, dispatch)
 }
 

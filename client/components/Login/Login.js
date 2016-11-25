@@ -12,10 +12,13 @@ import {
 	CardMedia,
 	CardTitle,
 	CardText
-} from 'material-ui/Card';
-import * as Colors from 'material-ui/styles/colors';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
+} from 'material-ui/Card'
+import * as Colors from 'material-ui/styles/colors'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
+import CircularProgress from 'material-ui/CircularProgress';
+
+import ErrorContent from '../ErrorContent'
 
 class Login extends Component {
 	constructor(props) {
@@ -52,7 +55,7 @@ class Login extends Component {
 	onUsernameChanged(e) {
 		const username = e.target.value
 		const usernameErrorText = username.length > 0 ? null : 'Username is required.'
-		const loginDisabled = usernameErrorText || this.state.passwordErrorText
+		const loginDisabled = usernameErrorText != null || this.state.passwordErrorText != null
 		this.setState({
 			username: username,
 			usernameErrorText: usernameErrorText,
@@ -61,15 +64,30 @@ class Login extends Component {
 	}
 
 	render() {
+		const {
+			status,
+			errorContent
+		} = this.props
+		const renderStatus = {
+			loading: function() {
+				return (<div className="text-center">
+							 <CircularProgress size={160} thickness={7} />
+						</div>)
+			},
+			error: function() {
+				return <ErrorContent message={errorContent} />
+			}
+		}
+		if (renderStatus.hasOwnProperty(status)) return renderStatus[status]()
 		return (
 			<Card className="content-container">
 				<CardHeader title="Login" titleColor={Colors.teal400} 
-					 			 titleStyle={{'font-weight': 'bolder'}}
-					 			 subtitle="After login success will response json web token and we can store this token in front-end.If don't have account you can access below.">
+					 			 titleStyle={{'fontWeight': 'bolder'}}
+					 			 subtitle="After login success will response json web token and we can store this token in front-end.If don't have account you can access below or you can try guest accunt [guest] password [guest]">
 				</CardHeader>
 				<CardText >
-					<TextField floatingLabelText="Username"  fullWidth="true" value={this.state.username} onChange={this.onUsernameChanged.bind(this)} errorText={this.state.usernameErrorText} />
-	    			<TextField floatingLabelText="Password" type="password" fullWidth="true"  value={this.state.password} onChange={this.onPasswordChanged.bind(this)} errorText={this.state.passwordErrorText} />
+					<TextField floatingLabelText="Username"  fullWidth={true} value={this.state.username} onChange={this.onUsernameChanged.bind(this)} errorText={this.state.usernameErrorText} />
+	    			<TextField floatingLabelText="Password" type="password" fullWidth={true}  value={this.state.password} onChange={this.onPasswordChanged.bind(this)} errorText={this.state.passwordErrorText} />
 	    			<p></p>
 	    			<RaisedButton label="Login" primary={true} fullWidth={true} onClick={this.onLoginClicked.bind(this)} disabled={this.state.loginDisabled} />
 	    			<br/>
@@ -82,7 +100,9 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-	handleLogin: PropTypes.func
+	errorContent: PropTypes.string,
+	handleLogin: PropTypes.func,
+	status: PropTypes.string
 }
 
 export default Login

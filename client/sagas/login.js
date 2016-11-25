@@ -13,14 +13,24 @@ import {
 	REQUEST_LOGIN_SUCCESS
 } from '../actions'
 
+import {
+	AuthService
+} from '../api'
+
 export function* watchLogin() {
 	yield call(takeEvery, REQUEST_LOGIN, loginFlow)
 }
 
 export function* loginFlow(action) {
 	try {
-
-
+		const authService = new AuthService()
+		const userInfo = yield call(authService.requestLogin, action.username, action.password)
+		const token = userInfo.token
+		console.log(userInfo)
+		yield put({
+			type: REQUEST_LOGIN_SUCCESS,
+			token
+		})
 	} catch (error) {
 		yield put({
 			type: REQUEST_LOGIN_FAILD,

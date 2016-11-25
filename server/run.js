@@ -14,10 +14,15 @@ let jwtauth = require(__base + 'middleware/jwtauth')();
 app.use(bodyParser.urlencoded({
 	extended: false
 }));
-app.use(bodyParser.json());
+
+app.use(bodyParser.json({
+	type: '*/*'
+}));
+
 // log to console
 app.use(morgan('dev'));
-
+//public folder
+app.use(express.static('../public'))
 app.use(jwtauth.initialize());
 mongoose.Promise = global.Promise;
 mongoose.connect(config.database);

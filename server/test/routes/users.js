@@ -63,6 +63,7 @@ module.exports = (app, username, displayName, password) => {
                     .set('Authorization', token)
                     .expect(200)
                     .end(function(err, res) {
+                        res.body.should.have.property('uid');
                         res.body.should.have.property('username');
                         res.body.should.have.property('displayName');
                         done(err);
