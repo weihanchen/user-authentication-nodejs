@@ -2,6 +2,8 @@ global.__base = __dirname + '/';
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const cors = require('cors')
+
 //the routing modules
 const users = require(__base + 'routes/users');
 const initial = require(__base + 'routes/initial');
@@ -18,6 +20,8 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json({
 	type: '*/*'
 }));
+//cors middleware,you can use this to ensure security
+app.use(cors())
 
 // log to console
 app.use(morgan('dev'));

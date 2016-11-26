@@ -85,6 +85,7 @@ exports.info = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
+    console.log(req.body)
     User.findOne({
         username: req.body.username
     }).exec().then(user => {

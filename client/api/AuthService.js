@@ -9,15 +9,13 @@ import {
 
 export default class AuthService {
 	requestLogin(username, password) {
-		const headers = new Headers()
-		headers.set('Content-Type', 'application/json')
 		const options = {
 			method: 'POST',
-			mode: 'no-cors',
-			headers: {
+			headers: new Headers({
 				'Accept': 'application/json',
-				'content-type': 'application/json'
-			},
+				'Content-Type': 'application/json'
+			}),
+			mode: 'cors',
 			body: JSON.stringify({
 				username: username,
 				password: password
