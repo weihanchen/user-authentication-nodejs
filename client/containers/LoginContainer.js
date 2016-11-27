@@ -6,8 +6,11 @@ import {
 	connect
 } from 'react-redux'
 import {
+	browserHistory
+} from 'react-router'
+import {
 	bindActionCreators
-} from 'redux';
+} from 'redux'
 import {
 	requestLogin
 } from '../actions'
@@ -15,6 +18,11 @@ import {
 import Login from '../components/Login'
 
 class LoginContainer extends Component {
+
+	componentWillReceiveProps(nextProps) {
+		const status = nextProps.login.status
+		if (status === 'success') browserHistory.push('/profile')
+	}
 
 	handleLogin(username, password) {
 		this.props.requestLogin(username, password)

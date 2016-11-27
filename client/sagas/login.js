@@ -26,7 +26,7 @@ export function* loginFlow(action) {
 		const authService = new AuthService()
 		const userInfo = yield call(authService.requestLogin, action.username, action.password)
 		const token = userInfo.token
-		console.log(userInfo)
+		localStorage.setItem('token', token)
 		yield put({
 			type: REQUEST_LOGIN_SUCCESS,
 			token

@@ -4,10 +4,24 @@ import {
 } from './helper.js'
 
 import {
+	CURRENT_USER_URL,
 	LOGIN_URL
 } from '../config'
 
 export default class AuthService {
+	requestAuth(token) {
+		const options = {
+			method: 'HEAD',
+			headers: new Headers({
+				'Authorization': token
+			}),
+			mode: 'cors'
+		}
+		return fetch(CURRENT_USER_URL, options)
+			.then(checkStatus)
+			.then(parseJSON)
+	}
+
 	requestLogin(username, password) {
 		const options = {
 			method: 'POST',

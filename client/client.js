@@ -24,7 +24,7 @@ injectTapEventPlugin();
 render(
 	<div>
 		<Provider store={store}>
-			<Router children={routes} history={hashHistory} />
+			<Router children={routes} history={browserHistory} />
 		</Provider>
 	</div>,
 	document.getElementById('root')

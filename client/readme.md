@@ -11,3 +11,12 @@
 * npm install
 * npm run dev - development
 * npm run build - build to ../public/bundle.js
+
+## Action Flow ##
+
+### Vaild Token ###
+>1. Auth -> Profile
+
+### Invaild Token ###
+>1. Auth -> Login -> Success -> Profile
+>2. Auth -> Login -> Faild -> Login
