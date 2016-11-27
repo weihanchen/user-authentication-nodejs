@@ -2,9 +2,7 @@ import React from 'react'
 import {
 	Redirect,
 	Route,
-	IndexRoute,
-	hashHistory,
-	browserHistory
+	IndexRoute
 } from 'react-router'
 
 //import components

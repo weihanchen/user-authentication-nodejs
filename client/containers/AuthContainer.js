@@ -9,7 +9,7 @@ import {
 	bindActionCreators
 } from 'redux'
 import {
-	browserHistory
+	hashHistory
 } from 'react-router'
 import LinearProgress from 'material-ui/LinearProgress';
 import {
@@ -20,7 +20,7 @@ class AuthContainer extends Component {
 
 	componentDidMount() {
 		const token = localStorage.getItem('token')
-		if (!token) browserHistory.push('/login')
+		if (!token) hashHistory.push('/login')
 		else this.props.requestAuthentication(token)
 	}
 
@@ -29,10 +29,10 @@ class AuthContainer extends Component {
 		const status = nextProps.authentication.status
 		const statusFunction = {
 			'success': function() {
-				browserHistory.push('/profile')
+				hashHistory.push('/profile')
 			},
 			'error': function() {
-				browserHistory.push('/login')
+				hashHistory.push('/login')
 			}
 		}
 		if (statusFunction.hasOwnProperty(status)) statusFunction[status]()
