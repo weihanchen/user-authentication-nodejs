@@ -1,0 +1,10 @@
+export const REQUEST_CURRENTUSER = 'REQUEST_CURRENTUSER'
+export const REQUEST_CURRENTUSER_FAILD = 'REQUEST_CURRENTUSER_FAILD'
+export const REQUEST_CURRENTUSER_SUCCESS = 'REQUEST_CURRENTUSER_SUCCESS'
+
+export function requestCurrentUser(token) {
+	return {
+		type: REQUEST_CURRENTUSER,
+		token
+	}
+}

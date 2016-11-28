@@ -7,12 +7,12 @@ import {
 
 //import components
 import App from './components/App'
-import Profile from './components/Profile'
 import Register from './components/Register'
 
 import {
 	AuthContainer,
-	LoginContainer
+	LoginContainer,
+	ProfileContainer
 } from './containers'
 
 const Routes = (
@@ -20,7 +20,7 @@ const Routes = (
 		<IndexRoute component={AuthContainer} />
 		<Route path='/auth' component={AuthContainer} />
 		<Route path='/login' component={LoginContainer} />
-		<Route path='/profile' component={Profile} />
+		<Route path='/profile' component={ProfileContainer} />
 		<Route path='/register' component={Register} />
 	</Route>
 )
