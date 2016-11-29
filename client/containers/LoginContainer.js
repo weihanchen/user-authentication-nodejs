@@ -51,8 +51,8 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 LoginContainer.propTypes = {
-	requestLogin: PropTypes.func,
-	login: PropTypes.object
+	login: PropTypes.object,
+	requestLogin: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)

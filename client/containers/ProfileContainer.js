@@ -13,7 +13,8 @@ import {
 } from 'react-router'
 import CircularProgress from 'material-ui/CircularProgress';
 import {
-	requestCurrentUser
+	requestCurrentUser,
+	requestUpdateUser
 } from '../actions'
 import ErrorContent from '../components/ErrorContent'
 import Profile from '../components/Profile'
@@ -28,7 +29,8 @@ class ProfileContainer extends Component {
 	}
 
 	handleUpdateUser(displayName, role, uid, username) {
-
+		const token = localStorage.getItem('token')
+		this.props.requestUpdateUser(token,displayName,role,uid,username)
 	}
 
 	render() {
@@ -45,7 +47,7 @@ class ProfileContainer extends Component {
 			error: function() {
 				return <ErrorContent message={user.error} />
 			},
-			success: function() {
+			load_current_user_success: function() {
 				return (
 					<Profile displayName={user.displayName} role={user.role} uid={user.uid} username={user.username} handleUpdateUser={self.handleUpdateUser.bind(self)} />
 				)
@@ -64,12 +66,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		requestCurrentUser
+		requestCurrentUser,
+		requestUpdateUser
 	}, dispatch)
 }
 
 ProfileContainer.propTypes = {
 	requestCurrentUser: PropTypes.func,
+	requestUpdateUser: PropTypes.func,
 	user: PropTypes.object
 }
 
