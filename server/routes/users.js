@@ -85,7 +85,6 @@ exports.info = (req, res, next) => {
 }
 
 exports.login = (req, res, next) => {
-    console.log(req.body)
     User.findOne({
         username: req.body.username
     }).exec().then(user => {
@@ -114,12 +113,18 @@ exports.login = (req, res, next) => {
 }
 
 exports.me = (req, res, next) => { //get users/me之前經過中間件驗證用戶權限，當驗證通過便取得正確用戶訊息，直接回傳即可
-    let responseBody = {
-        uid: req.user.id,
-        username: req.user.username,
-        displayName: req.user.displayName
-    }
-    res.send(responseBody);
+    let roleId = req.user.roleId
+    Role.findById(roleId).then(role => {
+        let responseBody = {
+            uid: req.user.id,
+            username: req.user.username,
+            displayName: req.user.displayName,
+            role: role.role
+        }
+        res.send(responseBody);
+    }).catch(error => {
+        next(errorBuilder.badRequest(error))
+    })
 }
 
 exports.signup = (req, res, next) => {

@@ -9,7 +9,7 @@ class PermissionValidator {
 
     }
 
-    currentUserOperation(loginUserId, userid) { //驗證使用者是否編輯自己的資訊，僅最高管理者不受此限
+    currentUserOperation(loginUserId, userid) { //驗證使用者是否瀏覽、編輯自己的資訊，僅最高管理者不受此限
         return new Promise((resolve, reject) => {
             let dbErrorHandler = (error) => {
                 reject(errorBuilder.internalServerError(error));
