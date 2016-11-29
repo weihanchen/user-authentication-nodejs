@@ -25,7 +25,6 @@ class AuthContainer extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		console.log(nextProps)
 		const status = nextProps.authentication.status
 		const statusFunction = {
 			'success': function() {

@@ -28,9 +28,16 @@ class ProfileContainer extends Component {
 		else this.props.requestCurrentUser(token)
 	}
 
-	handleUpdateUser(displayName, role, uid, username) {
+
+	handleUpdateUser(displayName, uid, username) {
 		const token = localStorage.getItem('token')
-		this.props.requestUpdateUser(token,displayName,role,uid,username)
+		const {
+			user
+		} = this.props
+		user.displayName = displayName
+		user.uid = uid
+		user.username = username
+		this.props.requestUpdateUser(token, user)
 	}
 
 	render() {
@@ -47,7 +54,7 @@ class ProfileContainer extends Component {
 			error: function() {
 				return <ErrorContent message={user.error} />
 			},
-			load_current_user_success: function() {
+			success: function() {
 				return (
 					<Profile displayName={user.displayName} role={user.role} uid={user.uid} username={user.username} handleUpdateUser={self.handleUpdateUser.bind(self)} />
 				)

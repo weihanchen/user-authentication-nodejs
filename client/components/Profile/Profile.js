@@ -46,7 +46,7 @@ class Profile extends Component {
 		const {
 			handleUpdateUser
 		} = this.props
-		handleUpdateUser(this.state.displayName, this.state.role, this.state.uid, this.state.username)
+		handleUpdateUser(this.state.displayName, this.state.uid, this.state.username)
 	}
 
 	render() {
@@ -57,7 +57,7 @@ class Profile extends Component {
 				<CardText>
 					<TextField floatingLabelText="DisplayName" fullWidth={true} value={this.state.displayName} onChange={this.onFieldChanged.bind(this,'displayName')} />
 					<TextField floatingLabelText="Username" fullWidth={true} value={this.state.username} onChange={this.onFieldChanged.bind(this,'username')} />
-					<TextField floatingLabelText="Role" fullWidth={true} value={this.state.role} onChange={this.onFieldChanged.bind(this,'role')} />
+					<TextField floatingLabelText="Role" fullWidth={true} value={this.state.role} disabled={true} />
 					<p></p>
 					<TextField floatingLabelText="UID" fullWidth={true} disabled={true} value={this.state.uid} ></TextField>
 					<hr/>

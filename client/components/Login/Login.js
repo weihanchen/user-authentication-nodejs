@@ -16,9 +16,8 @@ import {
 import * as Colors from 'material-ui/styles/colors'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
-import CircularProgress from 'material-ui/CircularProgress';
 
-import ErrorContent from '../ErrorContent'
+
 
 class Login extends Component {
 	constructor(props) {
@@ -68,17 +67,6 @@ class Login extends Component {
 			status,
 			errorContent
 		} = this.props
-		const renderStatus = {
-			loading: function() {
-				return (<div className="text-center">
-							 <CircularProgress size={160} thickness={7} />
-						</div>)
-			},
-			error: function() {
-				return <ErrorContent message={errorContent} />
-			}
-		}
-		if (renderStatus.hasOwnProperty(status)) return renderStatus[status]()
 		return (
 			<Card className="content-container">
 				<CardHeader title="Login" titleColor={Colors.teal400} 
@@ -101,8 +89,7 @@ class Login extends Component {
 
 Login.propTypes = {
 	errorContent: PropTypes.string,
-	handleLogin: PropTypes.func,
-	status: PropTypes.string
+	handleLogin: PropTypes.func
 }
 
 export default Login

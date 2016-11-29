@@ -7,12 +7,12 @@ import {
 
 //import components
 import App from './components/App'
-import Register from './components/Register'
 
 import {
 	AuthContainer,
 	LoginContainer,
-	ProfileContainer
+	ProfileContainer,
+	RegisterContainer
 } from './containers'
 
 const Routes = (
@@ -21,7 +21,7 @@ const Routes = (
 		<Route path='/auth' component={AuthContainer} />
 		<Route path='/login' component={LoginContainer} />
 		<Route path='/profile' component={ProfileContainer} />
-		<Route path='/register' component={Register} />
+		<Route path='/register' component={RegisterContainer} />
 	</Route>
 )
 

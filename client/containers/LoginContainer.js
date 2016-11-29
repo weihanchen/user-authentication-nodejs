@@ -14,7 +14,9 @@ import {
 import {
 	requestLogin
 } from '../actions'
+import CircularProgress from 'material-ui/CircularProgress';
 //components
+import ErrorContent from '../components/ErrorContent'
 import Login from '../components/Login'
 
 class LoginContainer extends Component {
@@ -32,8 +34,18 @@ class LoginContainer extends Component {
 		const {
 			login
 		} = this.props
+		const renderStatus = {
+			loading: function() {
+				return (<div className="text-center">
+							 <CircularProgress size={160} thickness={7} />
+						</div>)
+			},
+			error: function() {
+				return <ErrorContent message={errorContent} />
+			}
+		}
 		return (
-			<Login errorContent={login.error} status={login.status} handleLogin={this.handleLogin.bind(this)} />
+			<Login errorContent={login.error} handleLogin={this.handleLogin.bind(this)} />
 		)
 	}
 }

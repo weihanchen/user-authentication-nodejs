@@ -5,12 +5,14 @@ import {
 	watchAuthentication
 } from './authentication'
 import {
-	watchCurrentUser
+	watchCurrentUser,
+	watchUpdateUser
 } from './user'
 export default function* rootSaga() {
 	yield [
 		watchAuthentication(),
 		watchCurrentUser(),
-		watchLogin()
+		watchLogin(),
+		watchUpdateUser()
 	]
 }

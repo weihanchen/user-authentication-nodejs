@@ -17,7 +17,7 @@ export default function authentication(state = {
 			break
 		case REQUEST_AUTHENTICATION_FAILD:
 			return Object.assign({}, state, {
-				statue: 'error',
+				status: 'error',
 				error: action.error
 			})
 			break
