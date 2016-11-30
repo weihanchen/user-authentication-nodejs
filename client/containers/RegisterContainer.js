@@ -16,7 +16,10 @@ import {
 	requestSignupUser
 } from '../actions'
 import ErrorContent from '../components/ErrorContent'
-import Register from '../components/Register'
+import {
+	Register,
+	RegisterSuccess
+} from '../components/Register'
 
 
 class RegisterContainer extends Component {
@@ -36,7 +39,10 @@ class RegisterContainer extends Component {
 						</div>)
 			},
 			error: function() {
-				return <ErrorContent message={user.error} />
+				return <ErrorContent message={user.error.message} />
+			},
+			success: function() {
+				return (<RegisterSuccess displayName={user.displayName} username={user.username} />)
 			}
 		}
 		if (renderStatus.hasOwnProperty(user.status)) return renderStatus[user.status]()

@@ -27,7 +27,7 @@ export function* watchCurrentUser() {
 }
 
 export function* watchSignupUser() {
-	yield call(takeEvery,REQUEST_SIGNUP_USER,signupUserFlow)
+	yield call(takeEvery, REQUEST_SIGNUP_USER, signupUserFlow)
 }
 
 export function* watchUpdateUser() {
@@ -50,12 +50,14 @@ export function* currentUserFlow(action) {
 }
 
 export function* signupUserFlow(action) {
-	try{
-		yield call(userService.requestSignupUser,action.displayName,action.password,action.username)
+	try {
+		yield call(userService.requestSignupUser, action.displayName, action.password, action.username)
 		yield put({
-			type: REQUEST_SIGNUP_USER_SUCCESS
+			type: REQUEST_SIGNUP_USER_SUCCESS,
+			displayName: action.displayName,
+			username: action.username
 		})
-	}catch (error){
+	} catch (error) {
 		yield put({
 			type: REQUEST_FAILD,
 			error

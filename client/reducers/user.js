@@ -35,14 +35,16 @@ export default function user(state = {
 			})
 			break
 		case REQUEST_SIGNUP_USER:
-			return Object.assign({}, this.state, {
+			return Object.assign({}, state, {
 				status: 'loading',
 				error: null
 			})
 			break
 		case REQUEST_SIGNUP_USER_SUCCESS:
 			return Object.assign({}, state, {
-				status: 'success'
+				status: 'success',
+				displayName: action.displayName,
+				username: action.username
 			})
 			break
 		case REQUEST_UPDATEUSER:

@@ -32,7 +32,6 @@ export function* loginFlow(action) {
 			token
 		})
 	} catch (error) {
-		console.log(error)
 		yield put({
 			type: REQUEST_LOGIN_FAILD,
 			error

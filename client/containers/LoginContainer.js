@@ -41,11 +41,12 @@ class LoginContainer extends Component {
 						</div>)
 			},
 			error: function() {
-				return <ErrorContent message={errorContent} />
+				return <ErrorContent message={login.error.message} />
 			}
 		}
+		if (renderStatus.hasOwnProperty(login.status)) return renderStatus[login.status]()
 		return (
-			<Login errorContent={login.error} handleLogin={this.handleLogin.bind(this)} />
+			<Login handleLogin={this.handleLogin.bind(this)} />
 		)
 	}
 }

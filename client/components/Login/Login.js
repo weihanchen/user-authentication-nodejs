@@ -63,10 +63,6 @@ class Login extends Component {
 	}
 
 	render() {
-		const {
-			status,
-			errorContent
-		} = this.props
 		return (
 			<Card className="content-container">
 				<CardHeader title="Login" titleColor={Colors.teal400} 
@@ -88,7 +84,6 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-	errorContent: PropTypes.string,
 	handleLogin: PropTypes.func
 }
 

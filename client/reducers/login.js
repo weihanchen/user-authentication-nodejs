@@ -18,7 +18,7 @@ export default function login(state = {
 			break
 		case REQUEST_LOGIN_FAILD:
 			return Object.assign({}, state, {
-				statue: 'error',
+				status: 'error',
 				error: action.error
 			})
 			break

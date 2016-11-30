@@ -26,8 +26,15 @@ class Register extends Component {
 			confirmPassword: ''
 		}
 	}
-	onSignupUser() {
 
+	onFieldChanged(field, e) {
+		const updateObject = {}
+		updateObject[field] = e.target.value
+		this.setState(updateObject)
+	}
+
+	onSignupUser() {
+		this.props.handleSignupUser(this.state.displayName, this.state.password, this.state.username)
 	}
 
 	render() {
@@ -38,10 +45,10 @@ class Register extends Component {
 					 			 subtitle="We hope you will get started with this sample registration">
 				</CardHeader>
 				<CardText >
-					<TextField floatingLabelText="Your name"  fullWidth={true} value={this.state.displayName} />
-	    			<TextField floatingLabelText="Username" fullWidth={true} value={this.state.username} />
-	    			<TextField floatingLabelText="Password" type="password" fullWidth={true} value={this.state.password} />
-	    			<TextField floatingLabelText="Confirm Password" type="password" fullWidth={true} value={this.state.confirmPassword} />
+					<TextField floatingLabelText="Your name"  fullWidth={true} value={this.state.displayName} onChange={this.onFieldChanged.bind(this,'displayName')} />
+	    			<TextField floatingLabelText="Username" fullWidth={true} value={this.state.username} onChange={this.onFieldChanged.bind(this,'username')} />
+	    			<TextField floatingLabelText="Password" type="password" fullWidth={true} value={this.state.password} onChange={this.onFieldChanged.bind(this,'password')} />
+	    			<TextField floatingLabelText="Confirm Password" type="password" fullWidth={true} value={this.state.confirmPassword} onChange={this.onFieldChanged.bind(this,'confirmPassword')} />
 	    			<p></p>
 	    			<RaisedButton label="REGISTER" primary={true} fullWidth={true} onClick={this.onSignupUser.bind(this)} />
 	    			<br/>

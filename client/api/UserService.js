@@ -5,7 +5,6 @@ import {
 
 import {
 	CURRENT_USER_URL,
-	SIGNUP_USER_URL,
 	USERS_URL
 } from '../config'
 
@@ -37,9 +36,10 @@ export default class UserService {
 				username: username
 			})
 		}
-		return fetch(SIGNUP_USER_URL, options)
+		return fetch(USERS_URL, options)
 			.then(checkStatus)
 			.then(parseJSON)
+
 
 	}
 

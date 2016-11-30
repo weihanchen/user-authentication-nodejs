@@ -52,7 +52,7 @@ class ProfileContainer extends Component {
 						</div>)
 			},
 			error: function() {
-				return <ErrorContent message={user.error} />
+				return <ErrorContent message={user.error.message} />
 			},
 			success: function() {
 				return (

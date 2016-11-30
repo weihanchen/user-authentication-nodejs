@@ -6,6 +6,7 @@ import {
 } from './authentication'
 import {
 	watchCurrentUser,
+	watchSignupUser,
 	watchUpdateUser
 } from './user'
 export default function* rootSaga() {
@@ -13,6 +14,7 @@ export default function* rootSaga() {
 		watchAuthentication(),
 		watchCurrentUser(),
 		watchLogin(),
+		watchSignupUser(),
 		watchUpdateUser()
 	]
 }
