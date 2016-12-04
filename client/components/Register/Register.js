@@ -15,22 +15,49 @@ import {
 } from 'material-ui/Card'
 import * as Colors from 'material-ui/styles/colors';
 import TextField from 'material-ui/TextField';
+import FormsyText from 'formsy-material-ui/lib/FormsyText';
 import RaisedButton from 'material-ui/RaisedButton';
 class Register extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
+			canSubmit: false,
 			displayName: '',
 			username: '',
 			password: '',
-			confirmPassword: ''
+			confirmPassword: '',
+			confirmPasswordError: ''
 		}
+	}
+
+	enableButton() {
+		this.setState({
+			canSubmit: true
+		})
+	}
+
+	disableButton() {
+		this.setState({
+			canSubmit: false
+		})
 	}
 
 	onFieldChanged(field, e) {
 		const updateObject = {}
 		updateObject[field] = e.target.value
 		this.setState(updateObject)
+
+		if (field === 'confirmPassword' && this.state.password != e.target.value) {
+			this.setState({
+				canSubmit: false,
+				confirmPasswordError: 'Password do not match'
+			})
+		} else if (this.state.password === e.target.value) {
+			this.setState({
+				canSubmit: true,
+				confirmPasswordError: ''
+			})
+		}
 	}
 
 	onSignupUser() {
@@ -45,12 +72,20 @@ class Register extends Component {
 					 			 subtitle="We hope you will get started with this sample registration">
 				</CardHeader>
 				<CardText >
-					<TextField floatingLabelText="Your name"  fullWidth={true} value={this.state.displayName} onChange={this.onFieldChanged.bind(this,'displayName')} />
-	    			<TextField floatingLabelText="Username" fullWidth={true} value={this.state.username} onChange={this.onFieldChanged.bind(this,'username')} />
-	    			<TextField floatingLabelText="Password" type="password" fullWidth={true} value={this.state.password} onChange={this.onFieldChanged.bind(this,'password')} />
-	    			<TextField floatingLabelText="Confirm Password" type="password" fullWidth={true} value={this.state.confirmPassword} onChange={this.onFieldChanged.bind(this,'confirmPassword')} />
-	    			<p></p>
-	    			<RaisedButton label="REGISTER" primary={true} fullWidth={true} onClick={this.onSignupUser.bind(this)} />
+					<Formsy.Form onValid={this.enableButton.bind(this)}
+			            		 onInvalid={this.disableButton.bind(this)}
+			            		 onValidSubmit={this.onSignupUser.bind(this)}>
+						<TextField name="displayName" floatingLabelText="Your name" fullWidth={true} value={this.state.displayName} onChange={this.onFieldChanged.bind(this,'displayName')} required />
+						<TextField name="username" floatingLabelText="Username" fullWidth={true} value={this.state.username} onChange={this.onFieldChanged.bind(this,'username')} required />
+						<TextField name="password" floatingLabelText="Password" type="password" fullWidth={true} value={this.state.password} onChange={this.onFieldChanged.bind(this,'password')} required />
+						<TextField name="confirmPassword" floatingLabelText="Confirm Password" type="password" fullWidth={true} 
+									value={this.state.confirmPassword} onChange={this.onFieldChanged.bind(this,'confirmPassword')} 
+									errorText={this.state.confirmPasswordError}
+									required />
+						<p></p>
+						<RaisedButton type="submit" label="REGISTER" primary={true} fullWidth={true}  disabled={!this.state.canSubmit} onClick={this.onSignupUser.bind(this)} />
+					</Formsy.Form>
+
 	    			<br/>
 	    			<br/>
 	    			<Link to={'/login'} >Member Login</Link>
