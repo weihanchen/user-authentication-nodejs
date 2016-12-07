@@ -42,6 +42,13 @@ class Profile extends Component {
 		this.setState(updateObject)
 	}
 
+	onLogoutClicked() {
+		const {
+			handleLogout
+		} = this.props
+		handleLogout()
+	}
+
 	onUpdateClicked() {
 		const {
 			handleUpdateUser
@@ -65,7 +72,7 @@ class Profile extends Component {
 				</CardText>
 				 <CardActions>
 				      <RaisedButton label="Update" primary={true} onClick={this.onUpdateClicked.bind(this)} />
-					<RaisedButton label="Logout" primary={true} />
+					<RaisedButton label="Logout" primary={true} onClick={this.onLogoutClicked.bind(this)} />
     			</CardActions>
 			</Card>
 		)
@@ -76,6 +83,7 @@ export default Profile
 
 Profile.propTypes = {
 	displayName: PropTypes.string,
+	handleLogout: PropTypes.func,
 	handleUpdateUser: PropTypes.func,
 	role: PropTypes.string,
 	status: PropTypes.string,

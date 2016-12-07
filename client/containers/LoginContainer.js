@@ -21,6 +21,10 @@ import Login from '../components/Login'
 
 class LoginContainer extends Component {
 
+	constructor(props) {
+		super(props)
+	}
+
 	componentWillReceiveProps(nextProps) {
 		const status = nextProps.login.status
 		if (status === 'success') hashHistory.push('/profile')

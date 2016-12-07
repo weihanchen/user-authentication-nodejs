@@ -5,7 +5,8 @@ import {
 
 import {
 	CURRENT_USER_URL,
-	LOGIN_URL
+	LOGIN_URL,
+	LOGOUT_URL
 } from '../config'
 
 export default class AuthService {
@@ -36,6 +37,21 @@ export default class AuthService {
 			})
 		}
 		return fetch(LOGIN_URL, options)
+			.then(checkStatus)
+			.then(parseJSON)
+	}
+
+	requestLogout(token) {
+		const options = {
+			method: 'POST',
+			headers: new Headers({
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+				'Authorization': token
+			}),
+			mode: 'cors'
+		}
+		return fetch(LOGOUT_URL, options)
 			.then(checkStatus)
 			.then(parseJSON)
 	}

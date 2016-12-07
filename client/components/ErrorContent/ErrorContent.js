@@ -3,12 +3,16 @@ import React, {
 	PropTypes
 } from 'react'
 import {
-	Link
+	hashHistory
 } from 'react-router'
 
 class ErrorContent extends Component {
 	handleLinkClick(e) {
 		window.location.reload()
+	}
+
+	handleLoginClick() {
+		hashHistory.push('/login')
 	}
 
 	render() {
@@ -24,7 +28,9 @@ class ErrorContent extends Component {
 				<p></p>
 				<h4>{message}</h4>
 				<hr/>
-				<a href='javascript:void(0)' onClick={this.handleLinkClick.bind(this)}>Try it again?</a>
+				<a href="javascript:void(0)" onClick={this.handleLoginClick.bind(this)}>Redirect to Login?</a>
+				<br/>
+				<a href='javascript:void(0)' onClick={this.handleLinkClick.bind(this)}>Or try it again?</a>
 			</div>
 		)
 	}

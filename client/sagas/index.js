@@ -2,6 +2,9 @@ import {
 	watchLogin
 } from './login'
 import {
+	watchLogout
+} from './logout'
+import {
 	watchAuthentication
 } from './authentication'
 import {
@@ -14,6 +17,7 @@ export default function* rootSaga() {
 		watchAuthentication(),
 		watchCurrentUser(),
 		watchLogin(),
+		watchLogout(),
 		watchSignupUser(),
 		watchUpdateUser()
 	]

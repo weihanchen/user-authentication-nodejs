@@ -14,6 +14,7 @@ import {
 import CircularProgress from 'material-ui/CircularProgress';
 import {
 	requestCurrentUser,
+	requestLogout,
 	requestUpdateUser
 } from '../actions'
 import ErrorContent from '../components/ErrorContent'
@@ -26,6 +27,16 @@ class ProfileContainer extends Component {
 		const token = localStorage.getItem('token')
 		if (!token) hashHistory.push('/login')
 		else this.props.requestCurrentUser(token)
+	}
+
+	componentWillReceiveProps(nextProps) {
+		const logout_status = nextProps.logout.status
+		if (logout_status === 'success') hashHistory.push('/login')
+	}
+
+	handleLogout() {
+		const token = localStorage.getItem('token')
+		this.props.requestLogout(token)
 	}
 
 
@@ -56,7 +67,7 @@ class ProfileContainer extends Component {
 			},
 			success: function() {
 				return (
-					<Profile displayName={user.displayName} role={user.role} uid={user.uid} username={user.username} handleUpdateUser={self.handleUpdateUser.bind(self)} />
+					<Profile displayName={user.displayName} role={user.role} uid={user.uid} username={user.username} handleUpdateUser={self.handleUpdateUser.bind(self)} handleLogout={self.handleLogout.bind(self)} />
 				)
 			}
 		}
@@ -67,19 +78,22 @@ class ProfileContainer extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		user: state.user
+		user: state.user,
+		logout: state.logout
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		requestCurrentUser,
+		requestLogout,
 		requestUpdateUser
 	}, dispatch)
 }
 
 ProfileContainer.propTypes = {
 	requestCurrentUser: PropTypes.func,
+	requestLogout: PropTypes.func,
 	requestUpdateUser: PropTypes.func,
 	user: PropTypes.object
 }

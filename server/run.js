@@ -11,7 +11,9 @@ app.set('port', process.env.PORT || 3000);
 let config = require(__base + 'config/database'); // get db config file
 let morgan = require('morgan');
 let mongoose = require('mongoose');
+//middleware
 let jwtauth = require(__base + 'middleware/jwtauth')();
+let tokenManager = require(__base + 'middleware/token_manager');
 
 app.use(bodyParser.urlencoded({
 	extended: false
@@ -40,10 +42,13 @@ apiRoutes.route('/users')
 apiRoutes.route('/users/login')
 	.post(users.login)
 
-apiRoutes.use(jwtauth.authenticate()).route('/users/me')
+apiRoutes.use(jwtauth.authenticate()).route('/users/logout')
+	.post(users.logout)
+
+apiRoutes.use(tokenManager.vertifyToken, jwtauth.authenticate()).route('/users/me')
 	.get(users.me)
 
-apiRoutes.use(jwtauth.authenticate()).route('/users/:id')
+apiRoutes.use(tokenManager.vertifyToken, jwtauth.authenticate()).route('/users/:id')
 	.delete(users.delete)
 	.get(users.info)
 	.put(users.edit)
