@@ -5,6 +5,7 @@ export const REQUEST_SIGNUP_USER = 'REQUEST_SIGNUP_USER'
 export const REQUEST_SIGNUP_USER_SUCCESS = 'REQUEST_SIGNUP_USER_SUCCESS'
 export const REQUEST_UPDATEUSER = 'REQUEST_UPDATEUSER'
 export const REQUEST_UPDATEUSER_SUCCESS = 'REQUEST_UPDATEUSER_SUCCESS'
+export const RESET_USER_STATUS = 'RESET_USER_STATUS'
 
 export function requestCurrentUser(token) {
 	return {
@@ -27,5 +28,11 @@ export function requestUpdateUser(token, user) {
 		type: REQUEST_UPDATEUSER,
 		token,
 		user
+	}
+}
+
+export function resetUserStatus() {
+	return {
+		type: RESET_USER_STATUS
 	}
 }

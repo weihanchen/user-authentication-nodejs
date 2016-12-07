@@ -5,13 +5,16 @@ import {
 	REQUEST_SIGNUP_USER,
 	REQUEST_SIGNUP_USER_SUCCESS,
 	REQUEST_UPDATEUSER,
-	REQUEST_UPDATEUSER_SUCCESS
+	REQUEST_UPDATEUSER_SUCCESS,
+	RESET_USER_STATUS
 } from '../actions'
 
-export default function user(state = {
+const initState = {
 	error: null,
 	status: 'init'
-}, action) {
+}
+
+export default function user(state = initState, action) {
 	switch (action.type) {
 		case REQUEST_CURRENTUSER:
 			return Object.assign({}, state, {
@@ -61,6 +64,9 @@ export default function user(state = {
 				uid: action.user.uid,
 				username: action.user.username
 			})
+		case RESET_USER_STATUS:
+			return initState
+			break
 		default:
 			return state
 	}

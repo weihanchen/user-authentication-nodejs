@@ -1,14 +1,17 @@
 import {
 	REQUEST_LOGIN,
 	REQUEST_LOGIN_FAILD,
-	REQUEST_LOGIN_SUCCESS
+	REQUEST_LOGIN_SUCCESS,
+	RESET_LOGIN_STATUS
 } from '../actions'
 
-export default function login(state = {
+const initState = {
 	error: null,
 	status: 'init',
 	token: null
-}, action) {
+}
+
+export default function login(state = initState, action) {
 	switch (action.type) {
 		case REQUEST_LOGIN:
 			return Object.assign({}, state, {
@@ -27,7 +30,9 @@ export default function login(state = {
 				status: 'success',
 				token: action.token
 			})
-
+			break
+		case RESET_LOGIN_STATUS:
+			return initState
 			break
 		default:
 			return state

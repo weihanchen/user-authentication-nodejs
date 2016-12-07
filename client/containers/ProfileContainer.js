@@ -15,13 +15,19 @@ import CircularProgress from 'material-ui/CircularProgress';
 import {
 	requestCurrentUser,
 	requestLogout,
-	requestUpdateUser
+	requestUpdateUser,
+	resetLogoutStatus
 } from '../actions'
 import ErrorContent from '../components/ErrorContent'
 import Profile from '../components/Profile'
 
 
 class ProfileContainer extends Component {
+
+	constructor(props) {
+		super(props)
+		this.props.resetLogoutStatus()
+	}
 
 	componentDidMount() {
 		const token = localStorage.getItem('token')
@@ -87,7 +93,8 @@ const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
 		requestCurrentUser,
 		requestLogout,
-		requestUpdateUser
+		requestUpdateUser,
+		resetLogoutStatus
 	}, dispatch)
 }
 
@@ -95,6 +102,7 @@ ProfileContainer.propTypes = {
 	requestCurrentUser: PropTypes.func,
 	requestLogout: PropTypes.func,
 	requestUpdateUser: PropTypes.func,
+	resetLogoutStatus: PropTypes.func,
 	user: PropTypes.object
 }
 

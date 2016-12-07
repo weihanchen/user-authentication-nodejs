@@ -1,13 +1,16 @@
 import {
 	REQUEST_LOGOUT,
 	REQUEST_LOGOUT_FAILD,
-	REQUEST_LOGOUT_SUCCESS
+	REQUEST_LOGOUT_SUCCESS,
+	RESET_LOGOUT_STATUS
 } from '../actions'
 
-export default function logout(state = {
+const initState = {
 	error: null,
 	status: 'init'
-}, action) {
+}
+
+export default function logout(state = initState, action) {
 	switch (action.type) {
 		case REQUEST_LOGOUT:
 			return Object.assign({}, state, {
@@ -25,7 +28,9 @@ export default function logout(state = {
 			return Object.assign({}, state, {
 				status: 'success'
 			})
-
+			break
+		case RESET_LOGOUT_STATUS:
+			return initState
 			break
 		default:
 			return state

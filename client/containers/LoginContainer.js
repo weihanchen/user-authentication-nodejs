@@ -12,7 +12,8 @@ import {
 	bindActionCreators
 } from 'redux'
 import {
-	requestLogin
+	requestLogin,
+	resetLoginStatus
 } from '../actions'
 import CircularProgress from 'material-ui/CircularProgress';
 //components
@@ -23,6 +24,7 @@ class LoginContainer extends Component {
 
 	constructor(props) {
 		super(props)
+		this.props.resetLoginStatus()
 	}
 
 	componentWillReceiveProps(nextProps) {
@@ -63,13 +65,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		requestLogin
+		requestLogin,
+		resetLoginStatus
 	}, dispatch)
 }
 
 LoginContainer.propTypes = {
 	login: PropTypes.object,
-	requestLogin: PropTypes.func
+	requestLogin: PropTypes.func,
+	resetLoginStatus: PropTypes.func
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer)
