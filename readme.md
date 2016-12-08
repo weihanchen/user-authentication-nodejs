@@ -27,7 +27,7 @@ A nodejs server api for user authentication and use react to design frontend
 * cd client
 * npm install
 
-## [client react documentation]() ##
+## [client react documentation](client/readme.md) ##
 * client/readme.md
 
 This is simple demo of user authentication、permissions and account registration, use node js、express、mongodb to complete.
