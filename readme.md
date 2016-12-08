@@ -58,6 +58,7 @@ This is simple demo of user authentication、permissions and account registratio
 ### Readable API(only check token validity) ###
 * GET /api/users/me
 * GET /api/users/:id
+
 ### Editable API(check the validity and existence of the token in mongodb)
 * put /api/users/:id
 * delete /api/users/:id
