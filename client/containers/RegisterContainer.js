@@ -13,7 +13,8 @@ import {
 } from 'react-router'
 import CircularProgress from 'material-ui/CircularProgress';
 import {
-	requestSignupUser
+	requestSignupUser,
+	resetUserStatus
 } from '../actions'
 import ErrorContent from '../components/ErrorContent'
 import {
@@ -23,6 +24,11 @@ import {
 
 
 class RegisterContainer extends Component {
+
+	constructor(props) {
+		super(props)
+		this.props.resetUserStatus()
+	}
 
 	handleSignupUser(displayName, password, username) {
 		this.props.requestSignupUser(displayName, password, username)
@@ -58,12 +64,14 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return bindActionCreators({
-		requestSignupUser
+		requestSignupUser,
+		resetUserStatus
 	}, dispatch)
 }
 
 RegisterContainer.propTypes = {
 	requestSignupUser: PropTypes.func,
+	resetUserStatus: PropTypes.func,
 	user: PropTypes.object
 }
 

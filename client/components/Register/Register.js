@@ -46,13 +46,13 @@ class Register extends Component {
 		const updateObject = {}
 		updateObject[field] = e.target.value
 		this.setState(updateObject)
-
 		if (field === 'confirmPassword' && this.state.password != e.target.value) {
 			this.setState({
 				canSubmit: false,
 				confirmPasswordError: 'Password do not match'
 			})
-		} else if (this.state.password === e.target.value) {
+		}
+		if (field === 'confirmPassword' && this.state.password === e.target.value) {
 			this.setState({
 				canSubmit: true,
 				confirmPasswordError: ''
@@ -73,8 +73,7 @@ class Register extends Component {
 				</CardHeader>
 				<CardText >
 					<Formsy.Form onValid={this.enableButton.bind(this)}
-			            		 onInvalid={this.disableButton.bind(this)}
-			            		 onValidSubmit={this.onSignupUser.bind(this)}>
+			            		 onInvalid={this.disableButton.bind(this)}>
 						<TextField name="displayName" floatingLabelText="Your name" fullWidth={true} value={this.state.displayName} onChange={this.onFieldChanged.bind(this,'displayName')} required />
 						<TextField name="username" floatingLabelText="Username" fullWidth={true} value={this.state.username} onChange={this.onFieldChanged.bind(this,'username')} required />
 						<TextField name="password" floatingLabelText="Password" type="password" fullWidth={true} value={this.state.password} onChange={this.onFieldChanged.bind(this,'password')} required />
@@ -83,7 +82,7 @@ class Register extends Component {
 									errorText={this.state.confirmPasswordError}
 									required />
 						<p></p>
-						<RaisedButton type="submit" label="REGISTER" primary={true} fullWidth={true}  disabled={!this.state.canSubmit} onClick={this.onSignupUser.bind(this)} />
+						<RaisedButton type="button" label="REGISTER" primary={true} fullWidth={true}  disabled={!this.state.canSubmit} onClick={this.onSignupUser.bind(this)} />
 					</Formsy.Form>
 
 	    			<br/>

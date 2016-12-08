@@ -3,6 +3,9 @@ import React, {
 	PropTypes
 } from 'react'
 import {
+	Link
+} from 'react-router'
+import {
 	connect
 } from 'react-redux'
 import {
@@ -16,7 +19,8 @@ import {
 	requestCurrentUser,
 	requestLogout,
 	requestUpdateUser,
-	resetLogoutStatus
+	resetLogoutStatus,
+	resetUserStatus
 } from '../actions'
 import ErrorContent from '../components/ErrorContent'
 import Profile from '../components/Profile'
@@ -27,6 +31,7 @@ class ProfileContainer extends Component {
 	constructor(props) {
 		super(props)
 		this.props.resetLogoutStatus()
+		this.props.resetUserStatus()
 	}
 
 	componentDidMount() {
@@ -69,7 +74,11 @@ class ProfileContainer extends Component {
 						</div>)
 			},
 			error: function() {
-				return <ErrorContent message={user.error.message} />
+				return (
+					<div className="text-center">
+					<ErrorContent message={user.error.message} />
+					<Link to='/login'>Redirect to login</Link>
+				</div>)
 			},
 			success: function() {
 				return (
@@ -94,7 +103,8 @@ const mapDispatchToProps = (dispatch) => {
 		requestCurrentUser,
 		requestLogout,
 		requestUpdateUser,
-		resetLogoutStatus
+		resetLogoutStatus,
+		resetUserStatus
 	}, dispatch)
 }
 
@@ -103,6 +113,7 @@ ProfileContainer.propTypes = {
 	requestLogout: PropTypes.func,
 	requestUpdateUser: PropTypes.func,
 	resetLogoutStatus: PropTypes.func,
+	resetUserStatus: PropTypes.func,
 	user: PropTypes.object
 }
 

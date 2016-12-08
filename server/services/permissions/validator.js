@@ -15,6 +15,7 @@ class PermissionValidator {
                 reject(errorBuilder.internalServerError(error));
             }
             User.findById(userid).then(user => {
+                if (!user) reject(errorBuilder.notFound('resource not found'));
                 Role.findById(user.roleId).then(role => {
                     let isAdmin = role.level === initial_config.admin_role_level;
                     let isSelf = userid.toString() === loginUserId.toString();
