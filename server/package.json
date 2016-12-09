@@ -22,7 +22,6 @@
     },
     "scripts": {
         "dev": "node dev.js",
-	"start": "echo debug use",
         "test": "./node_modules/.bin/mocha test --timeout 20000",
         "product": "node run.js"
     },
