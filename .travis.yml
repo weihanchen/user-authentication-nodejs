@@ -8,7 +8,7 @@ before_script:
 - mongo user_auth_demo --eval 'db.addUser("travis", "test");'
 - cd server
 - npm install
-- cd client
+- cd ../client
 - npm install
 - cd ..
 branches:
