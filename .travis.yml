@@ -13,12 +13,14 @@ before_script:
 branches:
   only:
   - master
+
 script:
 - cd server
 - npm run test
 - cd ../client
 - npm run build
-- cd ..
+- cd ../
+
 notification:
   email:
   - willhanchen@gmail.com
