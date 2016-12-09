@@ -13,7 +13,7 @@ branches:
   - master
 script:
 - npm run test
-
+- cd ..
 notification:
   email:
   - willhanchen@gmail.com
