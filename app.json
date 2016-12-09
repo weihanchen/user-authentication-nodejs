@@ -1,5 +1,5 @@
 {
-	"name": "Node.js User Authentication & Reactjs",
+	"name": "Node.js User Authentication",
 	"description": "A user authentication Node.js api using React to demo",
 	"repository": "https://github.com/weihanchen/user-authentication-nodejs",
 	"keywords": ["node", "express", "authentication", "jwt", "react", "redux"]

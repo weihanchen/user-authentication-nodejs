@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/weihanchen/user-authentication-nodejs.svg?branch=master)](https://travis-ci.org/weihanchen/user-authentication-nodejs)
 [![Dependency Status](https://david-dm.org/weihanchen/user-authentication-nodejs.svg)](https://david-dm.org/weihanchen/user-authentication-nodejs)
 [![devDependencies Status](https://david-dm.org/weihanchen/user-authentication-nodejs/dev-status.svg)](https://david-dm.org/weihanchen/user-authentication-nodejs?type=dev)
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 A nodejs server api for user authentication and use react to design frontend
 
@@ -32,6 +31,11 @@ A nodejs server api for user authentication and use react to design frontend
 * client/readme.md
 
 ## [Demo Site](https://user-authentication-nodejs.herokuapp.com/) ##
+
+## Heroku Deployment ##
+You can quickly setup a sample heroku application by clicking the button below.
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 This is simple demo of user authentication、permissions and account registration, use node js、express、mongodb、reactjs to complete.
 
 ## Config ##
