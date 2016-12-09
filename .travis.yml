@@ -13,7 +13,7 @@ before_script:
 - npm install
 - cd ../client
 - npm install
-- cd ../
+- cd ..
 
 branches:
   only:
@@ -24,7 +24,7 @@ script:
 - npm run test
 - cd ../client
 - npm run build
-- cd ../
+- cd ..
 
 notification:
   email:
