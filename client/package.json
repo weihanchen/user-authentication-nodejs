@@ -21,6 +21,7 @@
         "formsy-material-ui": "^0.5.3",
         "formsy-react": "^0.18.1",
         "history": "^4.3.0",
+        "html-webpack-plugin": "^2.24.1",
         "material-ui": "^0.16.4",
         "moment": "^2.15.2",
         "node-sass": "^3.11.2",
