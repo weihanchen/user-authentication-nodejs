@@ -6,6 +6,14 @@
 
 A nodejs server api for user authentication and use react to design frontend
 
+## [Demo Site](https://user-authentication-nodejs.herokuapp.com/) ##
+
+## Heroku Deployment ##
+
+You can quickly setup a sample heroku application by clicking the button below.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+
 ## Requirement ##
 * [MongoDB](https://www.mongodb.com/) - Our Database v3.2
 * [Expressjs](http://expressjs.com/zh-tw/) - API Server
@@ -18,25 +26,20 @@ A nodejs server api for user authentication and use react to design frontend
 * MONGO_CONNECTION
 
 ## Install server dependence packages ##
-* cd server
-* npm install
-* development mode - npm run dev
-* production mode - npm run product
+```
+$ cd server
+$ npm install
+$ npm run dev //or npm run product 
+```
 
 ## Install client dependence packages ##
-* cd client
-* npm install
+```
+$ cd client
+$ npm install
+```
 
 ## [client react documentation](client/readme.md) ##
 * client/readme.md
-
-## [Demo Site](https://user-authentication-nodejs.herokuapp.com/) ##
-
-## Heroku Deployment ##
-You can quickly setup a sample heroku application by clicking the button below.
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-
-This is simple demo of user authentication、permissions and account registration, use node js、express、mongodb、reactjs to complete.
 
 ## Config ##
 >1. config/database.js - database and jwt secret configuration
