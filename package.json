@@ -2,7 +2,7 @@
   "name": "user_authentication",
   "description": "deployment",
   "scripts": {
-    "start": "cd ../server && npm install && npm run product",
+    "start": "cd server && npm install && npm run product",
     "heroku-postbuild": "echo This runs afterwards."
   },
   "engines": {
