@@ -5,6 +5,10 @@
   "scripts": {
     "start": "cd client && npm install && npm run build && cd ../server && npm install && npm run product"
   },
+  "engines": {
+    "node": "7.0.0",
+    "npm": "3.10.9"
+  },
   "author": "will.chen",
   "license": "ISC"
 }
