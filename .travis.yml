@@ -6,14 +6,14 @@ node_js:
 services:
 - mongodb
 
+env:
+  - TEST_DIR=server
+  - TEST_DIR=client
+
 before_script:
 - sleep 15
 - mongo user_auth_demo --eval 'db.addUser("travis", "test");'
-- cd server
-- npm install
-- cd ../client
-- npm install
-- cd ..
+- cd $TEST_DIR && npm install
 
 branches:
   only:
