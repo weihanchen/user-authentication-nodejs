@@ -64,13 +64,12 @@ $ npm install
 >8. [read documentation to use api](#Documentation)
 
 ## Authentication ##
-### Readable API(only check token validity) ###
-* GET /api/users/me
-* GET /api/users/:id
+Check token valid 
+* `/api/users/logout`
 
-### Editable API(check the validity and existence of the token in mongodb)
-* put /api/users/:id
-* delete /api/users/:id
+Check token valid and expired
+* `/api/users/:id`
+* `/api/users/me`
 
 ## Permissions(roles) ##
 * admin
