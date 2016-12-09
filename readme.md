@@ -30,7 +30,8 @@ A nodejs server api for user authentication and use react to design frontend
 ## [client react documentation](client/readme.md) ##
 * client/readme.md
 
-This is simple demo of user authentication、permissions and account registration, use node js、express、mongodb to complete.
+## [Demo Site](https://user-authentication-nodejs.herokuapp.com/) ##
+This is simple demo of user authentication、permissions and account registration, use node js、express、mongodb、reactjs to complete.
 
 ## Config ##
 >1. config/database.js - database and jwt secret configuration
@@ -69,7 +70,7 @@ This is simple demo of user authentication、permissions and account registratio
 	* `get` - all users and roles
 	* `post` - user and role
 	* `put` - all users and other user's role
-	
+
 * user
 	* `delete` - self
 	* `get` - self
@@ -102,7 +103,7 @@ This is simple demo of user authentication、permissions and account registratio
 * **api/users/:id**
 
 	` delete - delete user `
-	
+
 	` get - get user info `
 
 	` put - update username、displayName only superadmin can update other user's role`
@@ -119,5 +120,4 @@ This is simple demo of user authentication、permissions and account registratio
 * edit role name
 * add more test case for permissions
 * add business logic extension framework document
-* add frontend ui to run this sample
 * add swagger ui

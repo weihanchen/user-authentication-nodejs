@@ -3,6 +3,7 @@
   "description": "deployment",
   "scripts": {
     "start": "cd server && npm install && npm run product",
+    "build_client": "cd client && npm run build",
     "heroku-postbuild": "echo This runs afterwards."
   },
   "engines": {
