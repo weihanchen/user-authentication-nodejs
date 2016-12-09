@@ -1,0 +1,10 @@
+{
+  "name": "user_authentication",
+  "description": "deployment",
+  "node-main": "./server/run.js",
+  "scripts": {
+    "start": "cd client && npm install && npm run build && cd ../server && npm install && npm run product"
+  },
+  "author": "will.chen",
+  "license": "ISC"
+}
