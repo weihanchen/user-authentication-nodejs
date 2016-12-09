@@ -18,10 +18,12 @@ notification:
   email:
   - willhanchen@gmail.com
   on_success: always
+  on_failure: always
 deploy:
   provider: heroku
   api_key:
     secure: UDsPlgN9rMxFB+bR2U8LD1MIX4Fat7eNATy6nfFn33YXoVcxFdXbbVvLpW6RWkq4rutC5QNgryLNjWWc3YTPbSdqV9xzp4Jn0sv3Kmd6+Urp926Iw/NUvQ2tFnqAE9M4gR9SNR1COO87p9vMxSP+jn0KpFlCawNBBek/d9V2xHZIX+Ngh8d5Cv80a1fGlsJXjVgSAa92Vk1ih8pf9oSimy3PSpQtUtuurfMPIKLd9+zzNMlqtpAg5Imh4LDzBvxw6BijAvFkCqQZyq0vSzLiInsy0qX49OKRM7yebS/O4irATejwF4hZ9Xwcl6zgwy/QctB9a/6MHnQ783xZtpG4UrRG+5TAcnN5QEB3gPU8kTL1YtVl1x8vCAGd834eeyEBbP4C+BzrFvbyUJAit7IWRmwt167gMzppdVjpk3r3osa7RSMQjDNFD0dwj/BDvSFOgVL7LkvRD/K2/ajHw/cgaiAoOQu7tNJN19SSkvCdFqIKBdYfv8wEipTWb/sgE3KnjZJE5gVbRPLUcumGBTIm2DG3eA3RfkMNF2oiPkzn5Mnci23u3Eghf6zQ8X03N+cD9kCy62cme38Px15sFPDIV1tOEKN5rV760wz3X0x9+D9KImfcPwE7fw3lFBgVKNwlAMDwGcPtGtCBRIGJy4PSRByLqe/G3UOXlHu3fGZgR+E=
-  app: user-authentication-nodejs
+  app:
+    master: user-authentication-nodejs
   on:
     repo: weihanchen/user-authentication-nodejs
