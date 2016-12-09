@@ -1,9 +1,8 @@
 {
   "name": "user_authentication",
   "description": "deployment",
-  "node-main": "./server/run.js",
   "scripts": {
-    "start": "cd client && npm install && npm run build && cd ../server && npm install && npm run product",
+    "start": "cd ../server && npm install && npm run product",
     "heroku-postbuild": "echo This runs afterwards."
   },
   "engines": {
