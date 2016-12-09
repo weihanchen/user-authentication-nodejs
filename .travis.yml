@@ -9,13 +9,16 @@ services:
 before_script:
 - sleep 15
 - mongo user_auth_demo --eval 'db.addUser("travis", "test");'
-- cd server && npm install && cd ../client && npm install && cd ..
+- cd server
+- npm install
 
 branches:
   only:
   - master
 
-script: cd server && npm run test && cd ../client && npm run build && cd ..
+script:
+- npm run test
+- cd ..
 
 notification:
   email:
