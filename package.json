@@ -4,7 +4,7 @@
   "node-main": "./server/run.js",
   "scripts": {
     "heroku-prebuild": "echo This runs before heroku installs your dependencies",
-    "start": "cd server && npm run product",
+    "start": "cd client && npm install && npm run build && cd ../server && npm install && npm run product",
     "heroku-postbuild": "echo This runs afterwards."
   },
   "engines": {
