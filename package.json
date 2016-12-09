@@ -8,7 +8,7 @@
     "heroku-postbuild": "echo This runs afterwards."
   },
   "engines": {
-    "node": "7.0.0",
+    "node": "7.1.0",
     "npm": "3.10.9"
   },
   "author": "will.chen",
