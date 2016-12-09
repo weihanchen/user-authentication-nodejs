@@ -1,8 +1,11 @@
 language: node_js
+
 node_js:
 - 7.0.0
+
 services:
 - mongodb
+
 before_script:
 - sleep 15
 - mongo user_auth_demo --eval 'db.addUser("travis", "test");'
@@ -10,6 +13,8 @@ before_script:
 - npm install
 - cd ../client
 - npm install
+- cd ..
+
 branches:
   only:
   - master
@@ -26,6 +31,7 @@ notification:
   - willhanchen@gmail.com
   on_success: always
   on_failure: always
+
 deploy:
   provider: heroku
   api_key:
