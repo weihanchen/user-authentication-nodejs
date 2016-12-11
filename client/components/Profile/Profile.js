@@ -16,7 +16,7 @@ import {
 } from 'material-ui/Card'
 import RaisedButton from 'material-ui/RaisedButton'
 import TextField from 'material-ui/TextField'
-
+import FormsyText from 'formsy-material-ui/lib/FormsyText';
 import * as Colors from 'material-ui/styles/colors'
 
 class Profile extends Component {
@@ -34,6 +34,18 @@ class Profile extends Component {
 			uid: uid,
 			username: username
 		}
+	}
+
+	enableButton() {
+		this.setState({
+			canSubmit: true
+		})
+	}
+
+	disableButton() {
+		this.setState({
+			canSubmit: false
+		})
 	}
 
 	onFieldChanged(field, e) {
@@ -61,19 +73,21 @@ class Profile extends Component {
 		return (
 			<Card className='content-container'>
 				<CardHeader title={`Hello ${this.state.displayName}`} titleColor={Colors.teal400} titleStyle={{'fontWeight': 'bolder'}} ></CardHeader>
-				<CardText>
-					<TextField floatingLabelText="DisplayName" fullWidth={true} value={this.state.displayName} onChange={this.onFieldChanged.bind(this,'displayName')} />
-					<TextField floatingLabelText="Username" fullWidth={true} value={this.state.username} onChange={this.onFieldChanged.bind(this,'username')} />
-					<TextField floatingLabelText="Role" fullWidth={true} value={this.state.role} disabled={true} />
-					<p></p>
-					<TextField floatingLabelText="UID" fullWidth={true} disabled={true} value={this.state.uid} ></TextField>
-					<hr/>
-					
-				</CardText>
-				 <CardActions>
-				      <RaisedButton label="Update" primary={true} onClick={this.onUpdateClicked.bind(this)} />
-					<RaisedButton label="Logout" primary={true} onClick={this.onLogoutClicked.bind(this)} />
-    			</CardActions>
+				<Formsy.Form onValid={this.enableButton.bind(this)}
+			            	 onInvalid={this.disableButton.bind(this)}>
+					<CardText>
+						<FormsyText name="displayName" floatingLabelText="DisplayName" fullWidth={true} value={this.state.displayName} onChange={this.onFieldChanged.bind(this,'displayName')} required />
+						<FormsyText name="username" floatingLabelText="Username" fullWidth={true} value={this.state.username} onChange={this.onFieldChanged.bind(this,'username')} required />
+						<TextField name="role" floatingLabelText="Role" fullWidth={true} value={this.state.role} disabled={true} />
+						<p></p>
+						<TextField name="uid" floatingLabelText="UID" fullWidth={true} disabled={true} value={this.state.uid} ></TextField>
+						<hr/>
+					</CardText>
+				 	<CardActions>
+					     <RaisedButton type="button" label="Update" primary={true} onClick={this.onUpdateClicked.bind(this)} disabled={!this.state.canSubmit} />
+						 <RaisedButton type="button" label="Logout" primary={true} onClick={this.onLogoutClicked.bind(this)} />
+    				</CardActions>
+				</Formsy.Form>
 			</Card>
 		)
 	}

@@ -88,7 +88,7 @@ exports.login = (req, res, next) => {
         else {
             user.comparePassword(req.body.password, (error, isMatch) => { //使用user schema中定義的comparePassword檢查請求密碼是否正確
                 if (isMatch && !error) {
-                    let expires = moment().add(50, 'second').valueOf();
+                    let expires = moment().add(1, 'days').valueOf();
                     let token = jwt.encode({
                         iss: user.id, //加密對象
                         exp: expires

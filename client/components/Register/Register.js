@@ -74,10 +74,10 @@ class Register extends Component {
 				<CardText >
 					<Formsy.Form onValid={this.enableButton.bind(this)}
 			            		 onInvalid={this.disableButton.bind(this)}>
-						<TextField name="displayName" floatingLabelText="Your name" fullWidth={true} value={this.state.displayName} onChange={this.onFieldChanged.bind(this,'displayName')} required />
-						<TextField name="username" floatingLabelText="Username" fullWidth={true} value={this.state.username} onChange={this.onFieldChanged.bind(this,'username')} required />
-						<TextField name="password" floatingLabelText="Password" type="password" fullWidth={true} value={this.state.password} onChange={this.onFieldChanged.bind(this,'password')} required />
-						<TextField name="confirmPassword" floatingLabelText="Confirm Password" type="password" fullWidth={true} 
+						<FormsyText name="displayName" floatingLabelText="Your name" fullWidth={true} value={this.state.displayName} onChange={this.onFieldChanged.bind(this,'displayName')} required />
+						<FormsyText name="username" floatingLabelText="Username" fullWidth={true} value={this.state.username} onChange={this.onFieldChanged.bind(this,'username')} required />
+						<FormsyText name="password" floatingLabelText="Password" type="password" fullWidth={true} value={this.state.password} onChange={this.onFieldChanged.bind(this,'password')} required />
+						<FormsyText name="confirmPassword" floatingLabelText="Confirm Password" type="password" fullWidth={true} 
 									value={this.state.confirmPassword} onChange={this.onFieldChanged.bind(this,'confirmPassword')} 
 									errorText={this.state.confirmPasswordError}
 									required />
