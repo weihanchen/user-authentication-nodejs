@@ -123,8 +123,9 @@ Check token valid and expired
 
 
 ## To Do ##
-* get user list
+* admin dashboard
 * edit role name
+* edit password
 * add more test case for permissions
 * add business logic extension framework document
 * add swagger ui
