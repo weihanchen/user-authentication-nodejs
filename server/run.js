@@ -7,7 +7,7 @@ const cors = require('cors')
 //the routing modules
 const users = require(__base + 'routes/users');
 const initial = require(__base + 'routes/initial');
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 9000);
 let config = require(__base + 'config/database'); // get db config file
 let morgan = require('morgan');
 let mongoose = require('mongoose');

@@ -7,6 +7,7 @@ module.exports = (app, username, displayName, password) => {
     let initializeUrl = '/api/initialize';
     let usersUrl = '/api/users';
     let loginUrl = '/api/users/login';
+    let logoutUrl = '/api/users/logout';
     let meUrl = '/api/users/me';
     describe('initialize...', () => {
         it('should response status 200 when initialize', function(done) {
@@ -32,6 +33,7 @@ module.exports = (app, username, displayName, password) => {
                 })
         })
     })
+
     describe('Basic', () => {
         let token;
         let userid;
@@ -50,6 +52,7 @@ module.exports = (app, username, displayName, password) => {
                 })
 
         })
+
         describe('get user info...', () => {
             it('should response status 401 when not send with token', function(done) {
                 request.get(meUrl)
@@ -70,6 +73,7 @@ module.exports = (app, username, displayName, password) => {
                     })
             })
         })
+
         describe('delete user...', () => {
             let resourceUrl;
             before(function() {
@@ -94,6 +98,43 @@ module.exports = (app, username, displayName, password) => {
                         done(err);
                     })
             })
+        })
+    })
+
+    describe('Logout', () => {
+        let token;
+        let userid;
+        before((done) => {
+            request.post(loginUrl)
+                .set('Content-Type', 'application/json')
+                .send({
+                    username: username,
+                    password: password
+                })
+                .expect(200)
+                .end(function(err, res) {
+                    token = res.body.token;
+                    userid = res.body.uid;
+                    done(err);
+                })
+        })
+
+        it('should response status 401 when not send with token', function(done) {
+            request.post(logoutUrl)
+                .expect(401)
+                .end(function(err, res) {
+                    done(err)
+                })
+        })
+
+        it('should response 200 and contains Successful Logout.', function(done) {
+            request.post(logoutUrl)
+                .set('Authorization', token)
+                .expect(200)
+                .end(function(err, res) {
+                    res.body.message.should.equal('Successful Logout.');
+                    done(err);
+                })
         })
     })
 }

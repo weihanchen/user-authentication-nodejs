@@ -3,16 +3,16 @@
     "description": "api server",
     "node-main": "./run.js",
     "dependencies": {
-        "bcrypt-nodejs": "^0.0.3",
-        "body-parser": "^1.15.2",
-        "cors": "^2.8.1",
-        "express": "^4.14.0",
-        "jwt-simple": "^0.5.0",
-        "morgan": "^1.7.0",
-        "moment": "^2.14.1",
-        "mongoose": "^4.7.1",
-        "passport": "^0.3.2",
-        "passport-jwt": "^2.1.0"
+        "bcrypt-nodejs": "~0.0.3",
+        "body-parser": "~1.15.2",
+        "cors": "~2.8.1",
+        "express": "~4.14.0",
+        "jwt-simple": "~0.5.0",
+        "morgan": "~1.7.0",
+        "moment": "~2.14.1",
+        "mongoose": "~4.7.1",
+        "passport": "~0.3.2",
+        "passport-jwt": "~2.1.0"
     },
     "devDependencies": {
         "mocha": "^3.0.2",

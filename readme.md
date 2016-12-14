@@ -17,8 +17,8 @@ You can quickly setup a sample heroku application by clicking the button below.
 ## Requirement ##
 * [MongoDB](https://www.mongodb.com/) - Our Database v3.2
 * [Expressjs](http://expressjs.com/zh-tw/) - API Server
-* [Nodejs](https://nodejs.org/en/) - Backend Framework
-* [NPM](https://www.npmjs.com/) - Package Management
+* [Nodejs](https://nodejs.org/en/) - Backend Framework v7.1.0
+* [NPM](https://www.npmjs.com/) - Package Management v3.10.9
 
 ## System Environment Variables ##
 * PORT
