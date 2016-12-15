@@ -24,7 +24,7 @@
     "scripts": {
         "dev": "node dev.js",
         "test": "./node_modules/.bin/mocha test --timeout 20000",
-	      "test:coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha  -- --timeout 10000 --recursive test",
+	      "test:coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha  -- --timeout 10000 --recursive test --report lcovonly -R spec",
         "product": "node run.js"
     },
     "author": "will.chen",
