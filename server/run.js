@@ -7,7 +7,7 @@ const cors = require('cors')
 //the routing modules
 const users = require(__base + 'routes/users');
 const initial = require(__base + 'routes/initial');
-app.set('port', process.env.PORT || 9000);
+app.set('port', process.env.PORT || 3000);
 let config = require(__base + 'config/database'); // get db config file
 let morgan = require('morgan');
 let mongoose = require('mongoose');
@@ -42,16 +42,16 @@ apiRoutes.route('/users')
 apiRoutes.route('/users/login')
 	.post(users.login)
 
-apiRoutes.use(jwtauth.authenticate()).route('/users/logout')
-	.post(users.logout)
+apiRoutes.route('/users/logout')
+	.post(jwtauth.authenticate(),users.logout)
 
-apiRoutes.use(tokenManager.vertifyToken, jwtauth.authenticate()).route('/users/me')
-	.get(users.me)
+apiRoutes.route('/users/me')
+	.get(tokenManager.vertifyToken, jwtauth.authenticate(),users.me)
 
-apiRoutes.use(tokenManager.vertifyToken, jwtauth.authenticate()).route('/users/:id')
-	.delete(users.delete)
-	.get(users.info)
-	.put(users.edit)
+apiRoutes.route('/users/:id')
+	.delete(tokenManager.vertifyToken, jwtauth.authenticate(),users.delete)
+	.get(tokenManager.vertifyToken, jwtauth.authenticate(),users.info)
+	.put(tokenManager.vertifyToken, jwtauth.authenticate(),users.edit)
 
 
 app.use('/api', apiRoutes);
@@ -63,7 +63,7 @@ app.listen(app.get('port'), () => {
 });
 
 function errorHandler(err, req, res, next) {
-	res.status(err.status || 500).json(err);
+	res.status(err.status || /* istanbul ignore next: tired of writing tests */ 500).json(err);
 }
 
 

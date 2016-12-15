@@ -15,6 +15,7 @@
         "passport-jwt": "~2.1.0"
     },
     "devDependencies": {
+	      "istanbul": "^0.4.5",
         "mocha": "^3.0.2",
         "nodemon": "^1.9.1",
         "supertest": "^2.0.0",
@@ -23,8 +24,9 @@
     "scripts": {
         "dev": "node dev.js",
         "test": "./node_modules/.bin/mocha test --timeout 20000",
+	      "test:coverage": "./node_modules/.bin/istanbul cover ./node_modules/mocha/bin/_mocha  -- --timeout 10000 --recursive test",
         "product": "node run.js"
     },
     "author": "will.chen",
-    "license": "ISC"
+    "license": "MIT"
 }

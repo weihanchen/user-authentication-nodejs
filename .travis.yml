@@ -12,7 +12,7 @@ branches:
   only:
   - master
 script:
-- npm run test
+- npm run test:coverage
 - cd ..
 notification:
   email:

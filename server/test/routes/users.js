@@ -34,6 +34,22 @@ module.exports = (app, username, displayName, password) => {
         })
     })
 
+    describe('Login', () => {
+        it('should response status 400 and message conatins User not found.', function(done) {
+            request.post(loginUrl)
+                .set('Content-Type', 'application/json')
+                .send({
+                    username: 'User Not Found',
+                    password: 'User Not Found'
+                })
+                .expect(400)
+                .end(function(err, res) {
+                    res.body.message.should.equal('User not found.');
+                    done(err);
+                });
+        })
+    })
+
     describe('Logout', () => {
         let token;
         let userid;
@@ -49,16 +65,16 @@ module.exports = (app, username, displayName, password) => {
                     token = res.body.token;
                     userid = res.body.uid;
                     done(err);
-                })
-        })
+                });
+        });
 
         it('should response status 401 when not send with token', function(done) {
             request.post(logoutUrl)
                 .expect(401)
                 .end(function(err, res) {
                     done(err)
-                })
-        })
+                });
+        });
 
         it('should response 200 and contains Successful Logout.', function(done) {
             request.post(logoutUrl)
@@ -67,11 +83,21 @@ module.exports = (app, username, displayName, password) => {
                 .end(function(err, res) {
                     res.body.message.should.equal('Successful Logout.');
                     done(err);
+                });
+        });
+
+        it('should response status 401 when delete user after logout', function(done) {
+            resourceUrl = usersUrl + '/' + userid;
+            request.delete(resourceUrl)
+                .set('Authorization', token)
+                .expect(401)
+                .end(function(err, res) {
+                    done(err);
                 })
-        })
+        });
     })
 
-    describe('Operation', () => {
+    describe('User Role Operation', () => {
         let token;
         let userid;
         before((done) => { //login and save token
@@ -98,7 +124,7 @@ module.exports = (app, username, displayName, password) => {
                         done(err);
                     })
             })
-            it('should response status 200 and contains username、displayName when header has jwt token', function(done) {
+            it('should response status 200 and contains username、displayName when header has jwt token when get /users/me', function(done) {
                 request.get(meUrl)
                     .set('Authorization', token)
                     .expect(200)

@@ -7,7 +7,10 @@ exports.vertifyToken = (req, res, next) => {
 	}).then((result) => {
 		if (result) next(errorBuilder.unauthorized('Access token has expired'))
 		else next()
-	}).catch(error => next(error))
+	}).catch(error =>  {
+		/* istanbul ignore next */
+		next(error)
+	})
 }
 
 let getToken = (headers) => {

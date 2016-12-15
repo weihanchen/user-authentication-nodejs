@@ -6,6 +6,7 @@ let User = require(__base + 'models/user');
 let Role = require(__base + 'models/role');
 
 exports.initialize = (req, res, next) => {
+    /* istanbul ignore next */
     let errorHandler = (error) => {
         next(error);
     }
@@ -22,13 +23,15 @@ exports.initialize = (req, res, next) => {
 //private methods
 function setAdminUser() {
     return new Promise((resolve, reject) => {
+        /* istanbul ignore next */
         let dbErrorHandler = (error) => {
             reject(errorBuilder.badRequest(error.errmsg));
         }
         User.findOne({
             username: initial_config.admin_account
         }).then(user => {
-            if (user) { //has initialized
+            /* istanbul ignore if  */
+            if (user) {
                 resolve();
                 return;
             }
@@ -54,6 +57,7 @@ function setRoles() {
     return new Promise((resolve, reject) => {
         let promises = [];
         Role.count().then(count => {
+            /* istanbul ignore if  */
             if (count > 0) {
                 resolve();
                 return;
@@ -63,6 +67,7 @@ function setRoles() {
                 let promise = new Promise((roleResolve, roleReject) => {
                     let newRole = new Role(role);
                     newRole.save(error => {
+                        /* istanbul ignore if  */
                         if (error) roleReject(errorBuilder.badRequest(error.errmsg));
                         else roleResolve();
                     });
@@ -70,12 +75,14 @@ function setRoles() {
                 promises.push(promise);
             })
         }).catch(error => {
+            /* istanbul ignore next */
             reject(error);
         })
 
         Promise.all(promises).then(() => {
             resolve();
         }, error => {
+            /* istanbul ignore next */
             reject(error);
         })
     })
