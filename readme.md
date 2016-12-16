@@ -1,7 +1,7 @@
 # Nodejs user authentication sample base on json web token #
 
 [![Build Status](https://travis-ci.org/weihanchen/user-authentication-nodejs.svg?branch=master)](https://travis-ci.org/weihanchen/user-authentication-nodejs)
-[![Coverage Status](https://coveralls.io/repos/github/weihanchen/user-authentication-nodejs/badge.svg?branch=master)](https://coveralls.io/github/weihanchen/user-authentication-nodejs?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/weihanchen/user-authentication-nodejs/badge.svg?branch=master&bust=1)](https://coveralls.io/github/weihanchen/user-authentication-nodejs?branch=master)
 [![Dependency Status](https://david-dm.org/weihanchen/user-authentication-nodejs.svg)](https://david-dm.org/weihanchen/user-authentication-nodejs)
 [![devDependencies Status](https://david-dm.org/weihanchen/user-authentication-nodejs/dev-status.svg)](https://david-dm.org/weihanchen/user-authentication-nodejs?type=dev)
 
