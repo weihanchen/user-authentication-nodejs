@@ -27,7 +27,7 @@ let UserSchema = new Schema({
 UserSchema.pre('save', function(next) {
     let user = this;
     //密碼變更或新密碼時
-    if (user.isModified('password')) {
+    if (user.isModified('password') || this.isNew) {
         bcrypt.genSalt(10, function(err, salt) {
             /* istanbul ignore if */
             if (err) {

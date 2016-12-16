@@ -17,9 +17,10 @@ exports.notFound = (message) => {
         status: 404
     }
 }
+	/* istanbul ignore next */
 exports.internalServerError = (message) => {
     return {
-        message: message || /* istanbul ignore next: tired of writing tests */ 'Internal server error',
+        message: message || 'Internal server error',
         status: 500
     }
 }

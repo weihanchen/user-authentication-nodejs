@@ -14,9 +14,10 @@ class PermissionValidator {
             let dbErrorHandler = (error) => {
                 reject(errorBuilder.internalServerError(error));
             }
-            User.findById(userid).then(user => {
+
+            User.findOne({_id: userid}).then(user => {
                 if (!user) reject(errorBuilder.notFound('resource not found'));
-                Role.findById(user.roleId).then(role => {
+                Role.findOne({_id: user.roleId}).then(role => {
                     let isAdmin = role.level === initial_config.admin_role_level;
                     let isSelf = userid.toString() === loginUserId.toString();
                     if (isAdmin || isSelf) {
@@ -34,7 +35,7 @@ class PermissionValidator {
 
     editRoleInRoles(roleId) {
         return new Promise((resolve, reject) => {
-            Role.findById(roleId).then(role => {
+            Role.findOne({_id: roleId}).then(role => {
                 if (!role) reject(errorBuilder.badRequest('roleId not exist'));
                 else resolve(role);
             }).catch(error => {

@@ -10,6 +10,22 @@ module.exports = (app, username, displayName, password) => {
     let logoutUrl = '/api/users/logout';
     let meUrl = '/api/users/me';
     describe('initialize...', () => {
+        it('should response status 400 when initialize not ready', function(done) {
+            request.post(usersUrl)
+                .set('Content-Type', 'application/json')
+                .send({
+                    username: username,
+                    displayName: displayName,
+                    password: password,
+                })
+                .expect(400)
+                .end(function(err, res) {
+                    res.body.message.should.equal('please post /api/initialize');
+                    done(err);
+                })
+        })
+
+
         it('should response status 200 when initialize', function(done) {
             request.post(initializeUrl)
                 .expect(200)
@@ -19,6 +35,18 @@ module.exports = (app, username, displayName, password) => {
         })
     })
     describe('signup...', () => {
+        it('should response status 400 when property missing', function(done) {
+            request.post(usersUrl)
+                .set('Content-Type', 'application/json')
+                .send({
+
+                })
+                .expect(400)
+                .end(function(err, res) {
+                    done(err);
+                })
+        })
+
         it('should response status 200 when signup', function(done) {
             request.post(usersUrl)
                 .set('Content-Type', 'application/json')
@@ -29,6 +57,21 @@ module.exports = (app, username, displayName, password) => {
                 })
                 .expect(200)
                 .end(function(err, res) {
+                    done(err);
+                })
+        })
+
+        it('should response status 400 and response message contain username already exist. when sigup exist user', function(done) {
+            request.post(usersUrl)
+                .set('Content-Type', 'application/json')
+                .send({
+                    username: username,
+                    displayName: displayName,
+                    password: password,
+                })
+                .expect(400)
+                .end(function(err, res) {
+                    res.body.message.should.equal('username already exist.');
                     done(err);
                 })
         })
@@ -47,6 +90,20 @@ module.exports = (app, username, displayName, password) => {
                     res.body.message.should.equal('User not found.');
                     done(err);
                 });
+        })
+
+        it('should response status 400 and message contains Wrong password.', function(done) {
+            request.post(loginUrl)
+                .set('Content-Type', 'application/json')
+                .send({
+                    username: username,
+                    password: 'User Not Found'
+                })
+                .expect(400)
+                .end(function(err, res) {
+                    res.body.message.should.equal('Wrong password.');
+                    done(err);
+                })
         })
     })
 
@@ -100,6 +157,7 @@ module.exports = (app, username, displayName, password) => {
     describe('User Role Operation', () => {
         let token;
         let userid;
+        let resourceUrl;
         before((done) => { //login and save token
             request.post(loginUrl)
                 .set('Content-Type', 'application/json')
@@ -111,12 +169,13 @@ module.exports = (app, username, displayName, password) => {
                 .end(function(err, res) {
                     token = res.body.token;
                     userid = res.body.uid;
+                    resourceUrl = usersUrl + '/' + userid;
                     done(err);
                 })
 
         })
 
-        describe('get user info...', () => {
+        describe('get user info by users/me...', () => {
             it('should response status 401 when not send with token', function(done) {
                 request.get(meUrl)
                     .expect(401)
@@ -137,11 +196,52 @@ module.exports = (app, username, displayName, password) => {
             })
         })
 
-        describe('delete user...', () => {
-            let resourceUrl;
-            before(function() {
-                resourceUrl = usersUrl + '/' + userid;
+        describe('get user info by users/:id', () => {
+            it('should response 200 and contains uid、username、displayName、role', function(done) {
+                request.get(resourceUrl)
+                    .set('Authorization', token)
+                    .expect(200)
+                    .end(function(err, res) {
+                        res.body.should.have.property('uid');
+                        res.body.should.have.property('username');
+                        res.body.should.have.property('displayName');
+                        res.body.should.have.property('role');
+                        done(err);
+                    })
             })
+        })
+
+        describe('edit user...', () => {
+            // it('should response status 400 when update role', function(done) {
+            //     request.put(resourceUrl)
+            //         .set('Authorization', token)
+            //         .send({
+            //             roldId: $roldId
+            //         })
+            //         .expect(400)
+            //         .end(function(err, res) {
+            //             res.body.message.should.equal('cannot update role');
+            //             done(err);
+            //         })
+            // })
+
+            it('should user changed username and displayName status 200', function(done) {
+                request.put(resourceUrl)
+                    .set('Authorization', token)
+                    .send({
+                        username: 'test1',
+                        displayName: 'test1'
+                    })
+                    .expect(200)
+                    .end(function(err, res) {
+                        res.body.username.should.equal('test1');
+                        res.body.displayName.should.equal('test1');
+                        done(err);
+                    })
+            })
+        })
+
+        describe('delete user...', () => {
             it('should response success when deleting user exist', function(done) {
                 request.delete(resourceUrl)
                     .set('Authorization', token)

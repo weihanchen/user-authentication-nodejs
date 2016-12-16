@@ -41,13 +41,14 @@ exports.edit = (req, res, next) => {
     let userid = req.params.id;
     let rolePermissionMapping = {};
     let errorHandler = (error) => {
+      console.log(error)
         next(error);
     }
     let updateUser = (user) => {
         Object.assign(user, req.body);
         user.save().then(() => {
             res.json({
-                _id: user.id,
+                uid: user.id,
                 username: user.username,
                 displayName: user.displayName
             })
@@ -69,15 +70,18 @@ exports.edit = (req, res, next) => {
 }
 
 exports.info = (req, res, next) => {
+    let userid = req.params.id;
     let loginUserId = req.user.uid;
-    permissionValidator.currentUserOperation(loginUserId, userid).then(result => {
+    permissionValidator.currentUserOperation(loginUserId, userid).then((result) => {
         res.json({
-            _id: result.user._id,
+            uid: result.user._id,
             username: result.user.username,
             displayName: result.user.displayName,
             role: result.role.role
         })
-    }).catch(error => next(error));
+    }).catch(error => {
+      next(error);
+    });
 }
 
 exports.login = (req, res, next) => {
@@ -146,7 +150,7 @@ exports.me = (req, res, next) => { //get users/me之前經過中間件驗證用�
             res.send(responseBody);
         })
         .catch(error => {
-            next(errorBuilder.badRequest(error))
+            next(errorBuilder.internalServerError(error))
         })
 }
 
