@@ -22,9 +22,9 @@ You can quickly setup a sample heroku application by clicking the button below.
 * [NPM](https://www.npmjs.com/) - Package Management v3.10.9
 
 ## System Environment Variables ##
-* PORT
-* SECRET_KEY
-* MONGO_CONNECTION
+* your endpoint port number： `PORT`
+* jwt secret key： `SECRET_KEY`
+* mongo url： `MONGO_CONNECTION`
 
 ## Install server dependence packages ##
 ```
@@ -55,9 +55,9 @@ $ npm install
 >5. [bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) - ecrypt password
 
 ## Step ##
->1. edit config/database.js - database connection and jwt secret
->2. edit config/initial.js - super admin account and role's permissions
->3. run api server - npm run dev
+>1. edit server/config/database.js - database connection and jwt secret
+>2. edit server/config/initial.js - super admin account and role's permissions
+>3. run api server - `npm start`
 >4. post /api/initialize to create roles and super admin account
 >5. post api/users - create new account
 >6. post api/users/login - login and get jwt token then frontend can store this token to use other api

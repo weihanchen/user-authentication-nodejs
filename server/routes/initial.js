@@ -1,32 +1,28 @@
 'use strict';
-let initial_config = require(__base + 'config/initial'); // get initial config file
-let errorBuilder = require(__base + 'services/error/builder');
-// get the mongoose model
-let User = require(__base + 'models/user');
-let Role = require(__base + 'models/role');
+const initial_config = require(__base + 'config/initial'), // get initial config file
+      errorBuilder = require(__base + 'services/error/builder'),
+      User = require(__base + 'models/user'),
+      Role = require(__base + 'models/role');
 
 exports.initialize = (req, res, next) => {
     /* istanbul ignore next */
-    let errorHandler = (error) => {
-        next(error);
-    }
-    setRoles().then(() => {
-        setAdminUser().then(() => {
-            res.json({
-                success: true,
-                message: 'Successful initialize.'
-            })
-        }, errorHandler)
-    }, errorHandler)
+    const errorHandler = (error) => next(error);
+    setRoles()
+      .then(() => setAdminUser())
+      .then(() => {
+        res.json({
+            success: true,
+            message: 'Successful initialize.'
+        });
+      })
+      .catch(errorHandler);
 }
 
 //private methods
 function setAdminUser() {
     return new Promise((resolve, reject) => {
         /* istanbul ignore next */
-        let dbErrorHandler = (error) => {
-            reject(errorBuilder.badRequest(error.errmsg));
-        }
+        const dbErrorHandler = (error) => reject(errorBuilder.badRequest(error.errmsg));
         User.findOne({
             username: initial_config.admin_account
         }).then(user => {
