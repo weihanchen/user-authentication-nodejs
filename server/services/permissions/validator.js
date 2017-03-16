@@ -11,15 +11,15 @@ class PermissionValidator {
 
     currentUserOperation(loginUserId, userid) { //驗證使用者是否瀏覽、編輯自己的資訊，僅最高管理者不受此限
         return new Promise((resolve, reject) => {
-            let dbErrorHandler = (error) => {
+            const dbErrorHandler = (error) => {
                 reject(errorBuilder.internalServerError(error));
-            }
+            };
 
             User.findOne({_id: userid}).then(user => {
                 if (!user) reject(errorBuilder.notFound('resource not found'));
                 Role.findOne({_id: user.roleId}).then(role => {
-                    let isAdmin = role.level === initial_config.admin_role_level;
-                    let isSelf = userid.toString() === loginUserId.toString();
+                    const isAdmin = role.level === initial_config.admin_role_level;
+                    const isSelf = userid.toString() === loginUserId.toString();
                     if (isAdmin || isSelf) {
                         resolve({
                             user: user,
@@ -30,7 +30,7 @@ class PermissionValidator {
                     } else reject(errorBuilder.unauthorized('permission denied'));
                 }).catch(dbErrorHandler);
             }).catch(dbErrorHandler);
-        })
+        });
     }
 
     editRoleInRoles(roleId) {
@@ -40,8 +40,8 @@ class PermissionValidator {
                 else resolve(role);
             }).catch(error => {
                 reject(errorBuilder.internalServerError(error));
-            })
-        })
+            });
+        });
     }
 }
 

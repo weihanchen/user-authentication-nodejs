@@ -54,7 +54,7 @@ UserSchema.pre('save', (next) => {
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-UserSchema.methods.comparePassword = function(candidatePassword, callback) {
+UserSchema.methods.comparePassword = (candidatePassword, callback) =>{
     bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
         /* istanbul ignore if */
         if (err) {
