@@ -12,6 +12,6 @@
     "node": "7.1.0",
     "npm": "3.10.9"
   },
-  "author": "will.chen",
-  "license": "ISC"
+  "author": "weihanchen",
+  "license": "MIT"
 }

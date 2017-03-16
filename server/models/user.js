@@ -1,9 +1,9 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
-let bcrypt = require('bcrypt-nodejs');
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt-nodejs');
 
 // set up a mongoose model
-let UserSchema = new Schema({
+const UserSchema = new Schema({
     username: {
         type: String,
         unique: true,
@@ -24,16 +24,16 @@ let UserSchema = new Schema({
     }
 });
 
-UserSchema.pre('save', function(next) {
-    let user = this;
+UserSchema.pre('save', (next) => {
+    const user = this;
     //密碼變更或新密碼時
     if (user.isModified('password') || this.isNew) {
-        bcrypt.genSalt(10, function(err, salt) {
+        bcrypt.genSalt(10, (err, salt) => {
             /* istanbul ignore if */
             if (err) {
                 return next(err);
             }
-            bcrypt.hash(user.password, salt, null, function(err, hash) {
+            bcrypt.hash(user.password, salt, null, (err, hash) => {
                 /* istanbul ignore if */
                 if (err) {
                     return next(err);
