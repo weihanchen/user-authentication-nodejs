@@ -24,7 +24,7 @@ const UserSchema = new Schema({
     }
 });
 
-UserSchema.pre('save', (next) => {
+UserSchema.pre('save', function (next) {
     const user = this;
     //密碼變更或新密碼時
     if (user.isModified('password') || this.isNew) {

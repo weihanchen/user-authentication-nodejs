@@ -6,7 +6,6 @@ let Role = require(__base + 'models/role');
 
 class PermissionValidator {
     constructor() {
-
     }
 
     currentUserOperation(loginUserId, userid) { //驗證使用者是否瀏覽、編輯自己的資訊，僅最高管理者不受此限
