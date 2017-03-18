@@ -1,3 +1,4 @@
+'use strict';
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const bcrypt = require('bcrypt-nodejs');
@@ -54,7 +55,7 @@ UserSchema.pre('save', function (next) {
  * @param  {Function} callback [description]
  * @return {[type]}            [description]
  */
-UserSchema.methods.comparePassword = (candidatePassword, callback) =>{
+UserSchema.methods.comparePassword = function (candidatePassword, callback){
     bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
         /* istanbul ignore if */
         if (err) {
