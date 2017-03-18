@@ -1,4 +1,5 @@
 const supertest = require('supertest');
+require('should');
 module.exports = (app, username, displayName, password) => {
     const request = supertest(app);
     const initializeUrl = '/api/initialize';
