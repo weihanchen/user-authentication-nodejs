@@ -1,14 +1,11 @@
-let supertest = require('supertest');
-let moment = require('moment');
-let should = require('should');
-let util = require('util');
+const supertest = require('supertest');
 module.exports = (app, username, displayName, password) => {
-    let request = supertest(app);
-    let initializeUrl = '/api/initialize';
-    let usersUrl = '/api/users';
-    let loginUrl = '/api/users/login';
-    let logoutUrl = '/api/users/logout';
-    let meUrl = '/api/users/me';
+    const request = supertest(app);
+    const initializeUrl = '/api/initialize';
+    const usersUrl = '/api/users';
+    const loginUrl = '/api/users/login';
+    const logoutUrl = '/api/users/logout';
+    const meUrl = '/api/users/me';
     describe('initialize...', () => {
         it('should response status 400 when initialize not ready', function(done) {
             request.post(usersUrl)
@@ -22,18 +19,18 @@ module.exports = (app, username, displayName, password) => {
                 .end(function(err, res) {
                     res.body.message.should.equal('please post /api/initialize');
                     done(err);
-                })
-        })
+                });
+        });
 
 
         it('should response status 200 when initialize', function(done) {
             request.post(initializeUrl)
                 .expect(200)
-                .end(function(err, res) {
+                .end(function(err) {
                     done(err);
-                })
-        })
-    })
+                });
+        });
+    });
     describe('signup...', () => {
         it('should response status 400 when property missing', function(done) {
             request.post(usersUrl)
@@ -42,10 +39,10 @@ module.exports = (app, username, displayName, password) => {
 
                 })
                 .expect(400)
-                .end(function(err, res) {
+                .end(function(err) {
                     done(err);
-                })
-        })
+                });
+        });
 
         it('should response status 200 when signup', function(done) {
             request.post(usersUrl)
@@ -56,10 +53,10 @@ module.exports = (app, username, displayName, password) => {
                     password: password,
                 })
                 .expect(200)
-                .end(function(err, res) {
+                .end(function(err) {
                     done(err);
-                })
-        })
+                });
+        });
 
         it('should response status 400 and response message contain username already exist. when sigup exist user', function(done) {
             request.post(usersUrl)
@@ -73,9 +70,9 @@ module.exports = (app, username, displayName, password) => {
                 .end(function(err, res) {
                     res.body.message.should.equal('username already exist.');
                     done(err);
-                })
-        })
-    })
+                });
+        });
+    });
 
     describe('Login', () => {
         it('should response status 400 and message conatins User not found.', function(done) {
@@ -90,7 +87,7 @@ module.exports = (app, username, displayName, password) => {
                     res.body.message.should.equal('User not found.');
                     done(err);
                 });
-        })
+        });
 
         it('should response status 400 and message contains Wrong password.', function(done) {
             request.post(loginUrl)
@@ -103,9 +100,9 @@ module.exports = (app, username, displayName, password) => {
                 .end(function(err, res) {
                     res.body.message.should.equal('Wrong password.');
                     done(err);
-                })
-        })
-    })
+                });
+        });
+    });
 
     describe('Logout', () => {
         let token;
@@ -128,8 +125,8 @@ module.exports = (app, username, displayName, password) => {
         it('should response status 401 when not send with token', function(done) {
             request.post(logoutUrl)
                 .expect(401)
-                .end(function(err, res) {
-                    done(err)
+                .end(function(err) {
+                    done(err);
                 });
         });
 
@@ -144,15 +141,15 @@ module.exports = (app, username, displayName, password) => {
         });
 
         it('should response status 401 when delete user after logout', function(done) {
-            resourceUrl = usersUrl + '/' + userid;
+            const resourceUrl = usersUrl + '/' + userid;
             request.delete(resourceUrl)
                 .set('Authorization', token)
                 .expect(401)
-                .end(function(err, res) {
+                .end(function(err) {
                     done(err);
-                })
+                });
         });
-    })
+    });
 
     describe('User Role Operation', () => {
         let token;
@@ -171,18 +168,18 @@ module.exports = (app, username, displayName, password) => {
                     userid = res.body.uid;
                     resourceUrl = usersUrl + '/' + userid;
                     done(err);
-                })
+                });
 
-        })
+        });
 
         describe('get user info by users/me...', () => {
             it('should response status 401 when not send with token', function(done) {
                 request.get(meUrl)
                     .expect(401)
-                    .end(function(err, res) {
+                    .end(function(err) {
                         done(err);
-                    })
-            })
+                    });
+            });
             it('should response status 200 and contains username、displayName when header has jwt token when get /users/me', function(done) {
                 request.get(meUrl)
                     .set('Authorization', token)
@@ -192,9 +189,9 @@ module.exports = (app, username, displayName, password) => {
                         res.body.should.have.property('username');
                         res.body.should.have.property('displayName');
                         done(err);
-                    })
-            })
-        })
+                    });
+            });
+        });
 
         describe('get user info by users/:id', () => {
             it('should response 200 and contains uid、username、displayName、role', function(done) {
@@ -207,9 +204,9 @@ module.exports = (app, username, displayName, password) => {
                         res.body.should.have.property('displayName');
                         res.body.should.have.property('role');
                         done(err);
-                    })
-            })
-        })
+                    });
+            });
+        });
 
         describe('edit user...', () => {
             // it('should response status 400 when update role', function(done) {
@@ -237,9 +234,9 @@ module.exports = (app, username, displayName, password) => {
                         res.body.username.should.equal('test1');
                         res.body.displayName.should.equal('test1');
                         done(err);
-                    })
-            })
-        })
+                    });
+            });
+        });
 
         describe('delete user...', () => {
             it('should response success when deleting user exist', function(done) {
@@ -250,8 +247,8 @@ module.exports = (app, username, displayName, password) => {
                         res.body.should.have.property('success');
                         res.body.success.should.equal(true);
                         done(err);
-                    })
-            })
+                    });
+            });
             it('should response not found when user not exist', function(done) {
                 request.delete(resourceUrl)
                     .set('Authorization', token)
@@ -259,8 +256,8 @@ module.exports = (app, username, displayName, password) => {
                     .end(function(err, res) {
                         res.body.message.should.equal('resource not found');
                         done(err);
-                    })
-            })
-        })
-    })
-}
+                    });
+            });
+        });
+    });
+};

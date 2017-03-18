@@ -1,7 +1,7 @@
-let mongoose = require('mongoose');
-let Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-let ExpireTokenSchema = new Schema({
+const ExpireTokenSchema = new Schema({
 	token: {
 		type: String,
 		unique: true,
@@ -17,6 +17,6 @@ ExpireTokenSchema.index({
 	expireAt: 1
 }, {
 	expireAfterSeconds: 0
-})
+});
 
 module.exports = mongoose.model('ExpireToken', ExpireTokenSchema);
