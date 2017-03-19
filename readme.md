@@ -22,30 +22,24 @@ You can quickly setup a sample heroku application by clicking the button below.
 * [NPM](https://www.npmjs.com/) - Package Management v3.10.9
 
 ## System Environment Variables ##
-* PORT
-* SECRET_KEY
-* MONGO_CONNECTION
+* `PORT`
+* `SECRET_KEY`
+* `MONGO_CONNECTION`
 
-## Install server dependence packages ##
+## Install dependence packages ##
 ```
 $ cd server
 $ npm install
-$ npm run dev //or npm run product
-```
-
-## Install client dependence packages ##
-```
-$ cd client
+$ cd ../client
 $ npm install
 ```
 
 ## [client react documentation](client/readme.md) ##
-* client/readme.md
 
 ## Config ##
->1. config/database.js - database and jwt secret configuration
->2. secret - jwt auth secret
->3. database - database connection
+* `server/config/database.js` database and jwt secret configuration, default using system variables
+>1. secret - jwt auth secret
+>2. database - database connection
 
 ## Packages ##
 >1. [Mongoose](http://mongoosejs.com/) - mongodb object modeling
@@ -55,14 +49,21 @@ $ npm install
 >5. [bcrypt-nodejs](https://www.npmjs.com/package/bcrypt-nodejs) - ecrypt password
 
 ## Step ##
->1. edit config/database.js - database connection and jwt secret
->2. edit config/initial.js - super admin account and role's permissions
->3. run api server - npm run dev
->4. post /api/initialize to create roles and super admin account
->5. post api/users - create new account
->6. post api/users/login - login and get jwt token then frontend can store this token to use other api
->7. use request header: {Authorization: (jwt token)} when use other api
->8. [read documentation to use api](#Documentation)
+### General config
+>1. edit server/config/database.js or system variable fo `MONGO_CONNECTION`、`SECRET_KEY` - database connection and jwt secret
+>2. edit server/config/initial.js - super admin account and role's permissions
+>3. export `API_ENDPOINT` with system variable, allow client connection with server endpoint.
+### Start with development
+>1. server development: `npm run dev:server`
+>2. client development: `npm run dev:client`, default port `8080`
+### Production build and run
+>1. `npm run build_client`
+>2. `npm start`
+### initial users and rols step
+>1. post `/api/initialize` to create roles and super admin account
+>2. post `api/users` - create new account
+>3. post `api/users/login` - login and get jwt token then frontend can store this token to use other api
+>4. use request header: `{Authorization: (jwt token)}` when use other api
 
 ## Authentication ##
 Check token valid
@@ -120,13 +121,13 @@ Check token valid and expired
 
 ## API Test ##
 * npm install --dev
-* npm run test
+* npm run test:server
 
 
 ## To Do ##
-* admin dashboard
-* edit role name
-* edit password
-* add more test case for permissions
-* add business logic extension framework document
-* add swagger ui
+- [ ] admin dashboard
+- [ ] edit role name
+- [ ] edit password
+- [ ] add more test case for permissions
+- [ ] add business logic extension framework document
+- [ ] add swagger ui

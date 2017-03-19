@@ -2,11 +2,13 @@
   "name": "user_authentication",
   "description": "deployment",
   "scripts": {
+    "build:client": "cd client && npm run build",
+    "dev:client": "cd client && npm run dev",
+    "dev:server": "cd server && npm run dev",
+    "heroku-postbuild": "echo This runs afterwards.",
+    "start": "cd server && npm install && npm run product",    
     "test:server": "cd server && npm run test",
-    "test:server:coverage": "cd server && npm run test:coverage",
-    "start": "cd server && npm install && npm run product",
-    "build_client": "cd client && npm run build",
-    "heroku-postbuild": "echo This runs afterwards."
+    "test:server:coverage": "cd server && npm run test:coverage"
   },
   "engines": {
     "node": "7.1.0",

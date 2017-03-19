@@ -87,8 +87,6 @@ exports.login = (req, res, next) => {
         if (!user) next(errorBuilder.badRequest('User not found.'));
         else {
             user.comparePassword(req.body.password, (error, isMatch) => { //使用user schema中定義的comparePassword檢查請求密碼是否正確
-                console.log(isMatch);
-                console.log(error);
                 if (isMatch && !error) {
                     const expires = moment().add(1, 'days').valueOf();
                     const token = jwt.encode({
