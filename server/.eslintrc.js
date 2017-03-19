@@ -30,6 +30,6 @@ module.exports = {
         "no-console": "off",
         "no-var": "warn",
         "prefer-const": "warn",
-        "arrow-body-style": ["error", "as-needed",{ "requireReturnForObjectLiteral": true }]
+        "arrow-body-style": ["error", "always",{ "requireReturnForObjectLiteral": true }]
     }
 };

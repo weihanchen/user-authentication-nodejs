@@ -58,7 +58,7 @@ $ npm install
 >1. server development: `npm run dev:server`
 >2. client development: `npm run dev:client`, default port `8080`
 ### Production build and run
->1. `npm run build_client`
+>1. `npm run build:client`
 >2. `npm start`
 ### initial users and rols step
 >1. post `/api/initialize` to create roles and super admin account
