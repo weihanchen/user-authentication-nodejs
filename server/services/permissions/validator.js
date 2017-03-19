@@ -1,8 +1,8 @@
 'use strict';
-let errorBuilder = require(__base + 'services/error/builder');
-let initial_config = require(__base + 'config/initial'); // get initial config file
-let User = require(__base + 'models/user.js'); // get the mongoose model
-let Role = require(__base + 'models/role');
+const errorBuilder = require(__base + 'services/error/builder');
+const initial_config = require(__base + 'config/initial'); // get initial config file
+const User = require(__base + 'models/user.js'); // get the mongoose model
+const Role = require(__base + 'models/role');
 
 class PermissionValidator {
     constructor() {
