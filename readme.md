@@ -51,7 +51,7 @@ $ npm install
 
 ## Step ##
 ### General config
->1. edit server/config/database.js or system variable fo `MONGO_CONNECTION`、`SECRET_KEY` - database connection and jwt secret
+>1. edit server/config/database.js or system variable for `MONGO_CONNECTION`、`SECRET_KEY` - database connection and jwt secret
 >2. edit server/config/initial.js - super admin account and role's permissions
 >3. export `API_ENDPOINT` with system variable, allow client connection with server endpoint.
 ### Start with development
