@@ -5,7 +5,7 @@ services:
 - mongodb
 before_script:
 - sleep 15
-- mongo user_auth_demo --eval 'db.addUser("travis", "test");'
+- mongo user_auth_demo --eval 'db.createUser("travis", "test");'
 - cd server
 - npm install
 branches:
